@@ -28,8 +28,8 @@
         <div class="container">
            
     
-            <h1 id="menu_titel"></h1>
-            <p class="lead mb-4">...</p>
+            <h1 id="menu_titel">ບໍລິສັດ ຈະເລີນເຊກອງ ກຣຸບ</h1>
+            <p class="lead mb-4">CHALEUN SEKONG GROUP CO.,LTD</p>
     
             <div class="row">
                 
@@ -37,14 +37,16 @@
                     <span class="fa-stack fa-5x mb-2">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         
-                        <i class="fas fa-briefcase fa-stack-1x fa-inverse"></i>
+                        <!-- <i class="fas fa-briefcase fa-stack-1x fa-inverse"></i> -->
+                        <i class="fas fa-donate fa-stack-1x fa-inverse"></i>
+                        
                         <!-- <img  class="fas fa-circle " src="image/checkin.jpg" width="300" height="200"/> -->
                         
                         
                         
                     </span>
-                        <h4>ເຊັກອິນ</h4>
-                        <p class="mb-4">Check in</p>
+                        <h4>Finance and accounting</h4>
+                        <p class="mb-4">ການເງິນແລະການບັນຊີ</p>
                     </div>
                 
                     <div class="col-md-4 Purchase">
@@ -57,14 +59,15 @@
                     </span>
 
                     </span>
-                        <h4>ເຊັກເອົ້າ</h4>
-                        <p class="mb-4">Check out</p>
+                        <h4>Project Manager management</h4>
+                        <p class="mb-4">ການຄຸ້ມຄອງຜູ້ຈັດການໂຄງການ</p>
                     </div>
                 
                     <div class="col-md-4 Booking">
                     <span class="fa-stack fa-5x mb-2">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="far fa-list-alt fa-stack-1x fa-inverse"></i> 
+                        <i class="far fa-building fa-stack-1x fa-inverse"></i> 
+                       
                       
                         
                     <!--  -->
@@ -88,15 +91,16 @@
                     <div class="col-md-4 Purchase">
                     <span class="fa-stack fa-5x mb-2">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
-                        <i class="fas fa-concierge-bell fa-stack-1x fa-inverse"></i> <i class="fas fa-concierge-bell"></i>
+                        <i class="fas fa-users fa-stack-1x fa-inverse"></i>
+                        
                         
                     <!--  -->
                         
                     </span>
 
                     </span>
-                        <h4>ບໍລິການຫຼັງການຂາຍ</h4>
-                        <p class="mb-4">Room Service</p>
+                        <h4>Human Resource Management</h4>
+                        <p class="mb-4">ການຄຸ້ມຄອງຊັບພະຍາກອນມະນຸດ   </p>
                     </div>
                 
                     <a class="col-md-4 manag click">
@@ -108,8 +112,8 @@
                     <!--  -->
                         
                     </span>
-                        <h4>ຈັດການຂໍ້ມູນ</h4>
-                        <p class="mb-4"> Manage Data</p>
+                        <h4> Manage Data</h4>
+                        <p class="mb-4"> ຈັດການຂໍ້ມູນ</p>
                     </a>
 
                    <div class="col-md-4 report click">
@@ -119,8 +123,8 @@
                         
                        
                     </span>
-                        <h4>ບົດລາຍງານ</h4>
-                        <p class="mb-4">Report</p>
+                        <h4> Report</h4>
+                        <p class="mb-4">ບົດລາຍງານ</p>
                     </div>
                
                

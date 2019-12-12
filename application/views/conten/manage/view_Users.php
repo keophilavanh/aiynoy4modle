@@ -23,12 +23,12 @@
     ?>
 
     <div class="content p-4">
-        <h2 class="mb-4">ຈັດການຂໍ້ມມູນພະນັກງານ</h2>
+        <h2 class="mb-4">ຈັດການຂໍ້ມູນຜູ້ໃຊ້</h2>
 
         <div class="card mb-4">
             <div class="card-body">
                     <div align="right">   
-                    <button type="button" class="btn btn-success" title="ເພີ້ມ" name="add" id="add" >ເພີ້ມຂໍ້ມູນພະນັກງານ</button>
+                    <button type="button" class="btn btn-success" title="ເພີ້ມ" name="add" id="add" >ເພີ້ມຂໍ້ມູນຜູ້ໃຊ້</button>
                     
                     <h1> </h1>
                     </div>
@@ -158,7 +158,7 @@
            "serverSide":true,  
            "order":[],  
            "ajax":{  
-                url:"<?php echo base_url() . 'Employee/fetch_user'; ?>",  
+                url:"<?php echo base_url() . 'Users/fetch_user'; ?>",  
                 type:"POST"  
            },  
            "columnDefs":[  
@@ -228,15 +228,54 @@
            else  
            {  
            $.ajax({  
-               url:"<?php echo base_url() . 'Employee/addEmployee'; ?>",  
+               url:"<?php echo base_url() . 'Users/addUsers'; ?>",  
                method:"POST",  
-               data:$('#insert_form').serialize(),  
+               data:$('#insert_form').serialize(), 
+               dataType:"json",   
                beforeSend:function(){  
                $('#insert').val("ເພີ້ມລາຍການ");  
                },  
-               success:function(data){  
+               success:function(data){ 
+
                $('#insert_form')[0].reset();  
                $('#add_data_Modal').modal('hide');  
+               console.log("data");
+                console.log(data);
+               if(data.status=='ok'){
+
+                                          
+                                                                
+                    $.toast({
+                        heading: 'ແຈ້ງເຕືອນ!',
+                        text: data.msg,
+                        textFont: 'Saysettha OT',
+                        bgColor: '#009900',
+                        position: 'top-right',
+                        icon: 'success',
+                        loader: false,   
+                        loaderBg: '#ff6666',
+                        textColor: 'white'
+                    })
+
+                    $('#insert_form')[0].reset();  
+
+                    dataTable.ajax.reload();
+                }else{
+
+
+                    $.toast({
+                        heading: 'ແຈ້ງເຕືອນ!',
+                        text: data.msg,
+                        textFont: 'Saysettha OT',
+                        bgColor: '#cc3300',
+                        position: 'top-right',
+                        icon: 'error',
+                        loader: false,   
+                        loaderBg: '#ff6666',
+                        textColor: 'white'
+                    })
+                    }
+
                dataTable.ajax.reload();
                
                }  
@@ -254,20 +293,23 @@
                 var employee_id = $(this).attr("id");  
                 
                 $.ajax({  
-                    url:"<?php echo base_url() . 'Employee/getEmployee'; ?>", 
+                    url:"<?php echo base_url() . 'Users/getEmployee'; ?>", 
                     method:"POST",  
                     data:{employee_id:employee_id},  
                     dataType:"json",  
                     success:function(data){  
+
+                        console.log("data");
+                        console.log(data);
                          
-                        $('#firstName').val(data.emp_fname);  
-                        $('#lastName').val(data.emp_lname); 
-                        $('#phone').val(data.emp_phone); 
-                        $('#Address').val(data.emp_address); 
+                        $('#firstName').val(data.user_fname);  
+                        $('#lastName').val(data.user_lname); 
+                        $('#phone').val(data.user_phone); 
+                        $('#Address').val(data.user_address); 
                         $('#Username').val(data.username); 
                         $('#Password').val(data.decrypt); 
 
-                        $('#employee_id').val(data.emp_id);  
+                        $('#employee_id').val(data.user_id);  
                         $('#Type').val(data.permission);
                        
                         $('#add_data_Modal').modal('show');
@@ -293,7 +335,7 @@
                         if (willDelete) {
 
                             $.ajax({  
-                                    url:"<?php echo base_url() . 'Employee/deletEmployee'; ?>", 
+                                    url:"<?php echo base_url() . 'Users/deletEmployee'; ?>", 
                                     method:"POST",  
                                     data:{employee_id:employee_id},  
                                     dataType:"json",  

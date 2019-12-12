@@ -53,4 +53,5 @@ $route['default_controller'] = 'Login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['Logout'] = 'Login/user_logout';
 // $route['api/userlist'] = 'User/add';

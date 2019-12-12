@@ -8,12 +8,12 @@ class Main extends CI_Controller{
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Employee_model');
+        $this->load->model('Users_model');
        
     }
 
     public function index(){
-        if($this->Employee_model->check_token())
+        if($this->Users_model->check_token())
         {
             $this->load->view('conten/view_main');
         }

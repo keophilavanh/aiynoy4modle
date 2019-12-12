@@ -13,10 +13,26 @@
     
     
 
-    <title>System Name</title>
+   
     
 </head>
-<body class="bg-light" >
+<style>
+body, html {
+  height: 100%;
+  width: 100%; 
+ 
+}
+
+.bg {
+  /* The image used */
+  
+  background: url("<?php echo base_url('assets/image/login.png') ?>");
+  
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+</style>
+<body class="bg-light bg"  >
 <div class="container h-100">
             
         <div class="row h-100 justify-content-center align-items-center">
@@ -27,7 +43,7 @@
             <div class="col-md-4">
                 
                 <center>
-                <img src="<?php echo base_url('assets/image/logo.png') ?>" width="300" height="300"/>
+                <img src="<?php echo base_url('assets/image/logo.png') ?>" width="200" height="200"/>
                 <!-- <h2>Report</h2>
                 <p class="lead mb-4">Create By Nueng Mamipoko </p> -->
                 </center>

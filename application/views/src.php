@@ -1,4 +1,7 @@
 
+     <title>CHALEUN SEKONG GROUP CO.,LTD</title>
+    
+    <link rel="icon" href="<?php echo base_url('assets/image/logo.png') ?>" sizes="18x18">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/fontawesome-all.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootadmin.min.css') ?>">
