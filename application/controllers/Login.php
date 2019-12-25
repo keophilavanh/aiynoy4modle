@@ -46,6 +46,7 @@ class Login extends CI_Controller{
 
     public function Backup_auto(){
       
+        date_default_timezone_set("Asia/Bangkok");
         $this->load->dbutil();
         $db_format=array('format'=>'zip','filename'=>'my_db_backup.sql');
         $backup= $this->dbutil->backup($db_format);

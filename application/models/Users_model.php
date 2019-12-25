@@ -173,6 +173,41 @@ class Users_model extends MY_Model{
 
      }
 
+     function get_username_token(){
+
+        
+          $this->load->library('session');
+          date_default_timezone_set("Asia/Bangkok");
+          $token = $this->session->token;
+          $data = base64_decode($token);
+          $oj = json_decode($data);
+          $cb;
+          if(isset($oj->username)){
+               
+
+              
+               $this->db->select('*');
+               $this->db->from($this->table);
+               $this->db->where('username', $oj->username);
+               $this->db->where('password', $oj->password);
+               $query = $this->db->get();
+               $cb = $query->row();
+               //  die($cb->Date_login .' '.date("Y-m-d"));
+               if($cb->Date_login != date("Y-m-d")){
+                    $cb="";
+                    echo("<script>window.location = 'login';</script>");   
+               }
+
+          }else{
+               $cb="";
+               echo("<script>window.location = 'login';</script>");
+          }
+            
+
+          return $cb->user_fname.' '.$cb->user_lname; 
+
+     }
+
      
 }
 

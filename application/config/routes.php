@@ -54,4 +54,32 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['Logout'] = 'Login/user_logout';
+
+$route['Accounting'] = 'Accounting';
+
+$route['Vendor-invoice'] = 'vendor_invoice';
+$route['Create-invoice-Vendor/(:num)'] = 'vendor_invoice/create_by_vendor/$1';
+$route['Print-invoice-Vendor/(:num)'] = 'vendor_invoice/print_invoice/$1';
+
+$route['Code-accounting'] = 'code_accounting';
+$route['Payment-Type'] = 'Payment_Type';
+$route['Sub-Code'] = 'Sub_code'; 
+$route['Deposit-Accounts'] = 'Deposit_accounts'; 
+$route['Book-Accounting'] = 'Book_accounting';
+$route['Money-Type'] = 'Money_type';
+$route['Money-Go'] = 'money_go';
+
+$route['Finance-IN'] = 'Finance_in';
+$route['Create-Finance-IN'] = 'Finance_in/create_by_Finance_in';
+$route['Print-invoice-Finance-IN/(:num)'] = 'Finance_in/print_invoice/$1';
+
+$route['Finance-Out'] = 'Finance_out';
+$route['Create-Finance-Out'] = 'Finance_out/create_by_Finance_out';
+$route['Print-invoice-Finance-Out/(:num)'] = 'Finance_out/print_invoice/$1';
+
+
+$route['Create-Voucher'] = 'Voucher/create_by_Voucher';
+$route['Print-Voucher/(:num)'] = 'Voucher/print_invoice/$1';
+
+
 // $route['api/userlist'] = 'User/add';

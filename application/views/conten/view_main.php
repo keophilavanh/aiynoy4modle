@@ -33,8 +33,8 @@
     
             <div class="row">
                 
-                    <div class="col-md-4 service">
-                    <span class="fa-stack fa-5x mb-2">
+                    <div class="col-md-4 ">
+                    <span class="fa-stack fa-5x mb-2 accounting click">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         
                         <!-- <i class="fas fa-briefcase fa-stack-1x fa-inverse"></i> -->
@@ -49,8 +49,8 @@
                         <p class="mb-4">ການເງິນແລະການບັນຊີ</p>
                     </div>
                 
-                    <div class="col-md-4 Purchase">
-                    <span class="fa-stack fa-5x mb-2">
+                    <div class="col-md-4 ">
+                    <span class="fa-stack fa-5x mb-2 Purchase click">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-clipboard-list fa-stack-1x fa-inverse"></i> 
                         
@@ -63,8 +63,8 @@
                         <p class="mb-4">ການຄຸ້ມຄອງຜູ້ຈັດການໂຄງການ</p>
                     </div>
                 
-                    <div class="col-md-4 Booking">
-                    <span class="fa-stack fa-5x mb-2">
+                    <div class="col-md-4 ">
+                    <span class="fa-stack fa-5x mb-2 Booking click">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="far fa-building fa-stack-1x fa-inverse"></i> 
                        
@@ -88,8 +88,8 @@
                 
                   
                 
-                    <div class="col-md-4 Purchase">
-                    <span class="fa-stack fa-5x mb-2">
+                    <div class="col-md-4 ">
+                    <span class="fa-stack fa-5x mb-2 Purchase click">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-users fa-stack-1x fa-inverse"></i>
                         
@@ -103,8 +103,8 @@
                         <p class="mb-4">ການຄຸ້ມຄອງຊັບພະຍາກອນມະນຸດ   </p>
                     </div>
                 
-                    <a class="col-md-4 manag click">
-                    <span class="fa-stack fa-5x mb-2">
+                    <a class="col-md-4  ">
+                    <span class="fa-stack fa-5x mb-2 manag click">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-cog fa-stack-1x fa-inverse"></i> <i class="far fa-list-alt"></i>
                       
@@ -156,22 +156,22 @@
                 window.location.replace('Manage');
                   
             });
-            $(document).on('click', '.Booking', function(){  
+            $(document).on('click', '.accounting', function(){  
                  
-                window.location.replace('Booking');
+                window.location.replace('Accounting');
               
                    
              });
-             $(document).on('click', '.Purchase', function(){  
+            //  $(document).on('click', '.Purchase', function(){  
                  
-                 window.location.replace('modules/Purchase/Service/service.php');
+            //      window.location.replace('modules/Purchase/Service/service.php');
                    
-             });
-             $(document).on('click', '.report', function(){  
+            //  });
+            //  $(document).on('click', '.report', function(){  
                  
-                 window.location.replace('modules/report/report/report.php');
+            //      window.location.replace('modules/report/report/report.php');
                    
-             });
+            //  });
 
 
             
