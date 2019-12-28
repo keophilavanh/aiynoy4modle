@@ -59,7 +59,7 @@
                     </span>
 
                     </span>
-                        <h4>Project Manager management</h4>
+                        <h4>Project Management</h4>
                         <p class="mb-4">ການຄຸ້ມຄອງຜູ້ຈັດການໂຄງການ</p>
                     </div>
                 

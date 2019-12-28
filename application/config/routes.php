@@ -71,10 +71,12 @@ $route['Money-Go'] = 'money_go';
 
 $route['Finance-IN'] = 'Finance_in';
 $route['Create-Finance-IN'] = 'Finance_in/create_by_Finance_in';
+$route['Edit-Finance-IN/(:num)'] = 'Finance_in/edit_by_Finance_in/$1';
 $route['Print-invoice-Finance-IN/(:num)'] = 'Finance_in/print_invoice/$1';
 
 $route['Finance-Out'] = 'Finance_out';
 $route['Create-Finance-Out'] = 'Finance_out/create_by_Finance_out';
+$route['Edit-Finance-Out/(:num)'] = 'Finance_out/edit_by_Finance_out/$1';
 $route['Print-invoice-Finance-Out/(:num)'] = 'Finance_out/print_invoice/$1';
 
 

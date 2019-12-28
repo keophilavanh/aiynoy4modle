@@ -6,8 +6,8 @@
                     <i class="fas fa-hand-holding-usd"></i> ການເງີນ
                 </a>
                 <ul id="money" class="list-unstyled collapse">
-                    <li><a href="<?php echo base_url('Finance-IN') ?>"><i class="fas fa-file-alt"></i> ໃບອະຍຸມັດລາາຍຮັບ</a></li>
-                    <li><a href="<?php echo base_url('Finance-Out') ?>"><i class="fas fa-file-alt"></i> ໃບອະຍຸມັດລາາຍຈ່າຍ</a></li>
+                    <li><a href="<?php echo base_url('Finance-IN') ?>"><i class="fas fa-file-alt"></i> ໃບອະຍຸມັດລາຍຮັບ</a></li>
+                    <li><a href="<?php echo base_url('Finance-Out') ?>"><i class="fas fa-file-alt"></i> ໃບອະຍຸມັດລາຍຈ່າຍ</a></li>
                 </ul>
             </li>
 

@@ -11,8 +11,8 @@ class vendor_invoice extends CI_Controller{
         $this->load->model('Users_model');
         $this->load->model('Vendor_model');
         $this->load->model('Vendor_invoice_model');
-        $this->load->model('Rate_model');
-        
+        $this->load->model('Rate_model'); 
+        $this->load->model('Finance_out_model');
         
        
     }
@@ -269,6 +269,16 @@ class vendor_invoice extends CI_Controller{
             
             } 
 
+            $payment='';
+            $Finance_out = $this->Finance_out_model->vendor_pay($id);
+            foreach($Finance_out as $row)  
+            {  
+             
+                $payment .=' ໃບບິນທີ່ : '.$row->Ticket_No.'  ວັນທີ : '.date('d-m-Y', strtotime($row->Date)).' ມູນຄ່າ : '.number_format($row->ticket_total,0).' '.$row->Rate.' <br/>
+                ';
+               
+            
+            } 
 
             
             $this->load->library('Pdf');
@@ -367,12 +377,18 @@ class vendor_invoice extends CI_Controller{
                         <br/>
                         <table border="0" cellspacing="0" cellpadding="3"> 
                                 <tr>  
-                                    
+                                    <th align="Left"  >ຊຳລະເງີນຈ່າຍ :  </th>
                                     <th align="right" > ໜີ້ຄ້າງຈ່າຍ : '.number_format($ticket_data->amount,0).' '.$ticket_data->rate_name.' </th>  
                                     
                                 </tr>  
                                 <tr>  
+                                    <th align="Left" rowspan="2">'.$payment.'<br/>
+                                    </th>
+                                    <th align="right" > ຜູ້ໃຊ້ລະບົບ :'.$ticket_data->username.'</th>  
                                     
+                                </tr> 
+                                <tr>  
+                                   
                                     <th align="right" > ວັນທີພືມ :'.date("d-m-Y H:i:s").'</th>  
                                     
                                 </tr> 

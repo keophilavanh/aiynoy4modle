@@ -23,16 +23,16 @@
     ?>
 
     <div class="content p-4">
-        <h2 class="mb-4">ສ້າງໃບອະຍຸມັດລາຍຮັບ</h2>
+        <h2 class="mb-4">ແກ້ໄຂໃບອະຍຸມັດລາຍຮັບ</h2>
 
         <div class=" card mb-4">
             <div class="card-body row">
                     <div class="col-sm-4" >   
                         
                         <h5>- ອີງຕາມ : </h5>
-                        <textarea class="form-control"  rows="1" name="titel" id="titel"></textarea>
+                        <textarea class="form-control"  rows="1" name="titel" id="titel"> <?php echo $ticket_data->tital;?></textarea>
                         <h5>- ຫົວຂໍ້ : </h5>
-                        <textarea class="form-control"  rows="2" name="header" id="header"></textarea><br/>
+                        <textarea class="form-control"  rows="2" name="header" id="header"> <?php echo $ticket_data->header;?></textarea><br/>
                         
                     </div>
                     <div class="col-sm-4" align="center" >  
@@ -43,7 +43,8 @@
                     <div class="col-sm-2"  >   
                         <br/>
                         <br/>
-                        <h5> ວັນທີ : <?php echo date('d-m-Y')?> </h5>
+                        <h5> ວັນທີ : <?php echo date('d-m-Y', strtotime($ticket_data->Date)); ?> </h5>
+                        <h5> ເລກບິນ : <?php echo $ticket_data->Ticket_No; ?> </h5>
                         <!-- <input type="text" class="form-control" name="date" id="date" autocomplete="off" > -->
                        
                     </div>
@@ -81,25 +82,31 @@
                             </tr>
                             </thead>
                             <tbody>
+                                    <?php
+                                        $i=0;
+                                        foreach($fetch_data as $row)  
+                                        {  
+                                     
+                                        echo "<tr id='row".++$i."'>
+                                                    <td align='center'  contenteditable='false' >".$i."</td>
+                                                    <td align='left' contenteditable class='item_name'>".$row->Name."</td>
+                                                    <td align='center' contenteditable class='item_qty'>".$row->Qty."</td>
+                                                    <td align='center' contenteditable class='item_unit'>".$row->Unit."</td>
+                                                    <td align='right' contenteditable class='item_price' >".$row->Price."</td>
+                                                    <td align='right' contenteditable='false' >".$row->Qty*$row->Price."</td>
+                                                    <td> <button type='button' name='remove' data-row='".$i."' class='btn btn-icon btn-pill btn-danger remove'><i class='fa fa-fw fa-trash'></i></button></td>
+                                                </tr>
+                                        ";
 
+                                      
+                                        } 
+                                    
+                                    ?>
                                
                         
                 
                             </tbody>
-                            <tfoot>
-                                <tr id='row0'>
-                                    <td class="text-left" > </td>
-                                    <td class="text-left" ></td>
-                                    <td class="text-center" ></td>
-                                    <td class="text-right" ></td>
-                                    <td class="text-right" ></td>
-                                    <td class="text-right" ></td>
-                                    <td class="text-left" >
-                                   
-                                    </td>
-                                    
-                                </tr>
-                            </tfoot>
+                           
                             
                             
                             
@@ -109,7 +116,7 @@
                     </div>
                         <div class="col-sm-4"  >
                             <h5>ຈຳນວນເງິນລວມເປັນຕົວຫນັງສື : </h5>
-                            <textarea class="form-control"  rows="2" name="text_money" id="text_money"></textarea><br/>
+                            <textarea class="form-control"  rows="2" name="text_money" id="text_money"><?php echo $ticket_data->text_money;?> </textarea><br/>
                             <select class="form-control form-control-lg" name="type_money" id="type_money" >
                                 <?php 
                                     foreach($money_go as $row)  
@@ -140,7 +147,7 @@
                                 <h4 id="total_ticket"> ລວມເງີນ : 0 ກີບ  </h4><br/>
                                 <h4 id="total_ticket_kip">  </h4><br/>
                             </div>
-                            <button type="button" class="btn btn-primary btn-lg "  title="ບັນທືກ" name="save" id="save" >ບັນທືກ</button>
+                            <button type="button" class="btn btn-primary btn-lg "  title="ບັນທືກ" name="save" id="save" >ແກ້ໄຂ</button>
                         </div>
                        
                 
@@ -216,6 +223,11 @@
         return new Intl.NumberFormat('ja-JP').format(number);
     }
 
+      
+        $('#type_money').val(<?php echo $ticket_data->type_money; ?>); 
+        $( "#rate option:selected" ).text('<?php echo $ticket_data->Rate; ?>');
+        sumtotal();
+       
         $("#date").datetimepicker({format:'d-m-Y H:m:s'});
 
 
@@ -346,7 +358,7 @@
                 else{
 
                     swal({
-                        title: "ຢືນຢັງການບັນທືກຂໍ້ມູນ",
+                        title: "ຢືນຢັງການ ແກ້ໄຂຂໍ້ມູນ",
                         text: "ກະນຸນາຢືນຢັງ",
                         icon: "warning",
                         buttons: true,
@@ -355,6 +367,7 @@
                         .then((willDelete) => {
                         if (willDelete) {
 
+                                var invoid_id = '<?php echo $ticket_data->finance_in_id;?>';
                                 var titel =  $('#titel').val(); 
                                 var header =  $('#header').val(); 
                                 var date =  $('#date').val();
@@ -393,7 +406,7 @@
 
 
                             $.ajax({  
-                                    url:"<?php echo base_url() . 'Finance_in/insert_invoice'; ?>", 
+                                    url:"<?php echo base_url() . 'Finance_in/edit_Finance_in'; ?>", 
                                     method:"POST",  
                                     data:{
                                             titel:titel,
@@ -407,7 +420,8 @@
                                             item_qty:item_qty,
                                             item_unit:item_unit,
                                             item_price:item_price,
-                                            rate_name:rate_name
+                                            rate_name:rate_name,
+                                            invoid_id:invoid_id
                                         },  
                                     dataType:"json",  
                                     success:function(data){  
@@ -422,15 +436,15 @@
                                                 icon: "success",
                                                 });
 
+                                                // window.setTimeout(
+                                                // function(){window.open("<?php// echo base_url() . 'Print-invoice-Finance-IN/'; ?>"+data.ticket , '_blank')
+                                                //         window.location.replace('../Finance-IN')
+                                                //     }, 800);
+
                                                 window.setTimeout(
                                                 function(){
-                                                        window.location.replace('Finance-IN')
+                                                        window.location.replace('../Finance-IN')
                                                     }, 800);
-
-                                                // window.setTimeout(
-                                                // function(){window.open("<?php //echo base_url() . 'Print-invoice-Finance-IN/'; ?>"+data.ticket , '_blank')
-                                                //         window.location.replace('Finance-IN')
-                                                //     }, 800);
                                             
                                             
                                         }else{

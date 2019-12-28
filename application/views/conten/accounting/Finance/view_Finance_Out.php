@@ -23,7 +23,7 @@
     ?>
 
     <div class="content p-4">
-        <h2 class="mb-4">ໃບອະຍຸມັດລາາຍຈ່າຍ</h2>
+        <h2 class="mb-4">ໃບອະຍຸມັດລາຍຈ່າຍ</h2>
 
         <div class="card mb-4">
             <div class="card-body">
@@ -106,7 +106,76 @@
           
 
 
+           $(document).on('click', '.Apply', function(){  
+                
 
+                var finance_out_id = this.getAttribute("data-code");
+                var vendor_invoice_id = this.getAttribute("data-vendor");
+                var Ticket_total = this.getAttribute("data-Ticket");
+              
+                 swal({
+                        title: "ຢືນຢັນຂໍ້ມູນ",
+                        text: "ເຈົ້າຕ້ອງການຢືນຢັນຂໍ້ມູນ ຫຼື່ບໍ່!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                        if (willDelete) {
+
+                            $.ajax({  
+                                    url:"<?php echo base_url() . 'Finance_out/Apply_invoice'; ?>", 
+                                    method:"POST",  
+                                    data:{finance_out_id:finance_out_id,vendor_invoice_id:vendor_invoice_id,Ticket_total:Ticket_total},  
+                                    dataType:"json",  
+                                    success:function(data){  
+                                        dataTable.ajax.reload();
+                                        console.log("data");
+                                        console.log(data);
+                                        if(data.status=='ok'){
+
+                                          
+                                            
+                                                $.toast({
+                                                    heading: 'ແຈ້ງເຕືອນ!',
+                                                    text: data.msg,
+                                                    textFont: 'Saysettha OT',
+                                                    bgColor: '#009900',
+                                                    position: 'top-right',
+                                                    icon: 'success',
+                                                    loader: false,   
+                                                    loaderBg: '#ff6666',
+                                                    textColor: 'white'
+                                                })
+
+                                            
+                                            
+                                            dataTable.ajax.reload();
+                                            }else{
+
+
+                                            $.toast({
+                                                    heading: 'ແຈ້ງເຕືອນ!',
+                                                    text: data.msg,
+                                                    textFont: 'Saysettha OT',
+                                                    bgColor: '#cc3300',
+                                                    position: 'top-right',
+                                                    icon: 'error',
+                                                    loader: false,   
+                                                    loaderBg: '#ff6666',
+                                                    textColor: 'white'
+                                                })
+                                        }
+                                    }
+                                });
+                               
+                            
+                          
+                        }      
+                    }); 
+                
+                  
+            }); 
 
         
        
@@ -120,7 +189,7 @@
 
            
            $(document).on('click', '.edit_data', function(){  
-                var finance_in_id = $(this).attr("id");  
+                var finance_out_id = $(this).attr("id");  
               
                  swal({
                         title: "ຍົກເລີກຂໍ້ມູນ",
@@ -135,7 +204,7 @@
                             $.ajax({  
                                     url:"<?php echo base_url() . 'Finance_out/Edit_invoice'; ?>", 
                                     method:"POST",  
-                                    data:{finance_in_id:finance_in_id},  
+                                    data:{finance_out_id:finance_out_id},  
                                     dataType:"json",  
                                     success:function(data){  
                                         dataTable.ajax.reload();

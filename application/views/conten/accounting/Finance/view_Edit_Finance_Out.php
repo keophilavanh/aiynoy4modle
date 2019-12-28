@@ -23,27 +23,31 @@
     ?>
 
     <div class="content p-4">
-        <h2 class="mb-4">ສ້າງໃບອະຍຸມັດລາຍຮັບ</h2>
+        <h2 class="mb-4">ແກ້ໄຂໃບອະຍຸມັດລາຍຈ່າຍ</h2>
 
         <div class=" card mb-4">
             <div class="card-body row">
                     <div class="col-sm-4" >   
-                        
+
                         <h5>- ອີງຕາມ : </h5>
-                        <textarea class="form-control"  rows="1" name="titel" id="titel"></textarea>
+                        <textarea class="form-control"  rows="1" name="titel" id="titel"> <?php echo $ticket_data->tital;?></textarea>
                         <h5>- ຫົວຂໍ້ : </h5>
-                        <textarea class="form-control"  rows="2" name="header" id="header"></textarea><br/>
-                        
+                        <textarea class="form-control"  rows="2" name="header" id="header"> <?php echo $ticket_data->header;?></textarea><br/>
+
                     </div>
                     <div class="col-sm-4" align="center" >  
                         <br/>
-                        <h2> ໃບອະຍຸມັດລາຍຮັບ </h2>
+                        <h2> ໃບອະຍຸມັດລາຍຈ່າຍ </h2>
                     </div>
                     <div class="col-sm-2" align="right" > </div>
                     <div class="col-sm-2"  >   
                         <br/>
                         <br/>
                         <h5> ວັນທີ : <?php echo date('d-m-Y')?> </h5>
+                        <h5 id="show_vendor"> ລະຫັດໜີ້ :  ວ່າງ</h5>
+                        <button type="button" class="btn btn-success btn-lg" title="Select" name="Select" id="Select_vendor_invoice" >ເລືອກໃບໜີ້</button>
+                        <button type="button" class="btn btn-danger btn-lg" title="Select" name="Select" id="Remove_vendor_invoice" >ຍົກເລີກ</button>
+                        <input type="hidden" class="form-control" name="invoice_vendor" id="invoice_vendor" autocomplete="off" value="0" >
                         <!-- <input type="text" class="form-control" name="date" id="date" autocomplete="off" > -->
                        
                     </div>
@@ -82,24 +86,32 @@
                             </thead>
                             <tbody>
 
+                                    <?php
+                                        $i=0;
+                                        foreach($fetch_data as $row)  
+                                        {  
+                                     
+                                        echo "<tr id='row".++$i."'>
+                                                    <td align='center'  contenteditable='false' >".$i."</td>
+                                                    <td align='left' contenteditable class='item_name'>".$row->Name."</td>
+                                                    <td align='center' contenteditable class='item_qty'>".$row->Qty."</td>
+                                                    <td align='center' contenteditable class='item_unit'>".$row->Unit."</td>
+                                                    <td align='right' contenteditable class='item_price' >".$row->Price."</td>
+                                                    <td align='right' contenteditable='false' >".$row->Qty*$row->Price."</td>
+                                                    <td> <button type='button' name='remove' data-row='".$i."' class='btn btn-icon btn-pill btn-danger remove'><i class='fa fa-fw fa-trash'></i></button></td>
+                                                </tr>
+                                        ";
+
+                                      
+                                        } 
+                                    
+                                    ?>
+
                                
                         
                 
                             </tbody>
-                            <tfoot>
-                                <tr id='row0'>
-                                    <td class="text-left" > </td>
-                                    <td class="text-left" ></td>
-                                    <td class="text-center" ></td>
-                                    <td class="text-right" ></td>
-                                    <td class="text-right" ></td>
-                                    <td class="text-right" ></td>
-                                    <td class="text-left" >
-                                   
-                                    </td>
-                                    
-                                </tr>
-                            </tfoot>
+                            
                             
                             
                             
@@ -109,7 +121,7 @@
                     </div>
                         <div class="col-sm-4"  >
                             <h5>ຈຳນວນເງິນລວມເປັນຕົວຫນັງສື : </h5>
-                            <textarea class="form-control"  rows="2" name="text_money" id="text_money"></textarea><br/>
+                            <textarea class="form-control"  rows="2" name="text_money" id="text_money"> <?php echo $ticket_data->text_money;?> </textarea><br/>
                             <select class="form-control form-control-lg" name="type_money" id="type_money" >
                                 <?php 
                                     foreach($money_go as $row)  
@@ -140,7 +152,7 @@
                                 <h4 id="total_ticket"> ລວມເງີນ : 0 ກີບ  </h4><br/>
                                 <h4 id="total_ticket_kip">  </h4><br/>
                             </div>
-                            <button type="button" class="btn btn-primary btn-lg "  title="ບັນທືກ" name="save" id="save" >ບັນທືກ</button>
+                            <button type="button" class="btn btn-primary btn-lg "  title="ບັນທືກ" name="save" id="save" >ແກ້ໄຂ</button>
                         </div>
                        
                 
@@ -148,6 +160,41 @@
         </div>
     </div>
 </div>
+
+                <div id="add_data_Modal" class="modal fade">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                <div class="modal-header">
+                    
+                    <h4 id="insert_h" class="modal-title">ລາຍຊື່ເຈົ້າໜີ້</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <table class="table table-bordered" id="vendor_table"  cellspacing="0" width="100%">
+                        <thead>
+                        <tr>
+                            <th scope="col">ລະຫັດ</th>
+                            <th scope="col">ຊື່ເຈົ້າໜີ້</th>
+                            <th scope="col">ສະຖານະ</th>
+                            <th scope="col">ໜີ້ຄ້າງຈ່າຍ</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        
+                        <tbody>
+                            
+                        
+                        </tbody>
+                    
+                    </table>
+               
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </div>
+                </div>
+                </div>
 
 
                 
@@ -215,6 +262,22 @@
         console.log(new Intl.NumberFormat('ja-JP').format(parseInt(number)));
         return new Intl.NumberFormat('ja-JP').format(number);
     }
+
+
+        $('#type_money').val(<?php echo $ticket_data->type_money; ?>); 
+        $( "#rate option:selected" ).text('<?php echo $ticket_data->Rate; ?>');
+        sumtotal();
+
+        $('#invoice_vendor').val(<?php echo $ticket_data->invoice_vendor_id; ?>); 
+        
+                   
+
+        if($('#invoice_vendor').val() > 0){
+            var vendor_invoice_id = $('#invoice_vendor').val();
+            document.getElementById("show_vendor").innerHTML= 'ລະຫັດໜີ້ : '+vendor_invoice_id;
+        }else{
+            document.getElementById("show_vendor").innerHTML= 'ລະຫັດໜີ້ :  ວ່າງ';
+        }
 
         $("#date").datetimepicker({format:'d-m-Y H:m:s'});
 
@@ -287,6 +350,55 @@
             });
 
 
+
+
+            $('#vendor_table').DataTable({  
+                "processing":true,  
+                "serverSide":true,  
+                "order":[],  
+                "ajax":{  
+                        url:"<?php echo base_url() . 'vendor_invoice/fetch_invoice_list'; ?>",  
+                        type:"POST"  
+                },  
+                "columnDefs":[  
+                        {  
+                            "targets":[0,4],  
+                            "orderable":false,  
+                        }, 
+                         
+                        {
+                            "targets": 3,
+                            "className": "text-right",
+                        } 
+                ],  
+                
+            });
+
+            $('#Select_vendor_invoice').click(function () {
+                $('#add_data_Modal').modal('show');
+                //window.location.href = 'Create-invoice-Vendor/4';
+                 
+           });
+
+           $(document).on('click', '.edit_data', function(){  
+                var vendor_invoice_id = $(this).attr("id"); 
+                  document.getElementById("show_vendor").innerHTML= 'ລະຫັດໜີ້ : '+vendor_invoice_id;
+                  $('#invoice_vendor').val(vendor_invoice_id);   
+                  $('#add_data_Modal').modal('hide');  
+                
+              
+            });
+
+        
+            $(document).on('click', '#Remove_vendor_invoice', function(){  
+               
+                document.getElementById("show_vendor").innerHTML= 'ລະຫັດໜີ້ :  ວ່າງ';
+                  $('#invoice_vendor').val(0);   
+                
+              
+            });
+
+
         
 
 
@@ -297,17 +409,8 @@
                 var x  = document.getElementById("Data_table").rows[1].cells.item(0).innerHTML;
                
                 
-                if($('#date').val() == '')
-                {
-
-                    swal({
-                            title: "ກະລຸນາເລືອກ ວັນທີ ແລະ ເວລາ",
-                            text:   'ບໍ່ມີຂໍ້ມູນ',
-                            icon: "warning",
-                        });  
-
-                }
-                else if($('#titel').val() == ''){
+               
+               if($('#titel').val() == ''){
 
                 swal({
                         title: "ກະລຸນາປ້ອນຂໍ້ມູນ ອີງຕາມ",
@@ -354,12 +457,13 @@
                         })
                         .then((willDelete) => {
                         if (willDelete) {
-
+                                var invoid_id = '<?php echo $ticket_data->finance_out_id;?>';
                                 var titel =  $('#titel').val(); 
                                 var header =  $('#header').val(); 
                                 var date =  $('#date').val();
                                 var text_money =  $('#text_money').val(); 
                                 var type_money =  $('#type_money').val(); 
+                                var vendor_invoice =  $('#invoice_vendor').val(); 
 
                                 var rate =  $('#rate').val(); 
                                 var rate_name = new String($( "#rate option:selected" ).text());
@@ -393,7 +497,7 @@
 
 
                             $.ajax({  
-                                    url:"<?php echo base_url() . 'Finance_in/insert_invoice'; ?>", 
+                                    url:"<?php echo base_url() . 'Finance_out/edit_Finance_out'; ?>", 
                                     method:"POST",  
                                     data:{
                                             titel:titel,
@@ -403,11 +507,13 @@
                                             type_money:type_money,
                                             rate:rate,
                                             ticket_total:ticket_total,
+                                            vendor_invoice:vendor_invoice,
                                             item_name:item_name,
                                             item_qty:item_qty,
                                             item_unit:item_unit,
                                             item_price:item_price,
-                                            rate_name:rate_name
+                                            rate_name:rate_name,
+                                            invoid_id:invoid_id
                                         },  
                                     dataType:"json",  
                                     success:function(data){  
@@ -422,15 +528,15 @@
                                                 icon: "success",
                                                 });
 
+                                                // window.setTimeout(
+                                                // function(){window.open("<?php// echo base_url() . 'Print-invoice-Finance-Out/'; ?>"+data.ticket , '_blank')
+                                                //         window.location.replace('Finance-Out')
+                                                //     }, 800);
+
                                                 window.setTimeout(
                                                 function(){
-                                                        window.location.replace('Finance-IN')
+                                                        window.location.replace('../Finance-Out')
                                                     }, 800);
-
-                                                // window.setTimeout(
-                                                // function(){window.open("<?php //echo base_url() . 'Print-invoice-Finance-IN/'; ?>"+data.ticket , '_blank')
-                                                //         window.location.replace('Finance-IN')
-                                                //     }, 800);
                                             
                                             
                                         }else{

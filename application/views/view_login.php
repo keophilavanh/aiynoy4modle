@@ -43,7 +43,7 @@ body, html {
             <div class="col-md-4">
                 
                 <center>
-                <img src="<?php echo base_url('assets/image/logo.png') ?>" width="200" height="200"/>
+                <!-- <img src="<?php echo base_url('assets/image/logo.png') ?>" width="200" height="200"/> -->
                 <!-- <h2>Report</h2>
                 <p class="lead mb-4">Create By Nueng Mamipoko </p> -->
                 </center>

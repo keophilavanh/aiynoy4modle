@@ -16,7 +16,7 @@ class Finance_in_model extends MY_Model{
          //$this->db->join('tb_vendor','tb_vendor.vendor_id=tb_invoice_vendor.vendor_id');
 
          if($status != 0){
-          $this->db->where('status', 'Normal');
+          $this->db->where('status', 'Apply');
           }
 
           if(isset($_POST["search"]["value"]))  
@@ -62,7 +62,7 @@ class Finance_in_model extends MY_Model{
          $this->db->from($this->table);  
 
          if($status != 0){
-          $this->db->where('status', 'Normal');
+          $this->db->where('status', 'Apply');
           }
 
          return $this->db->count_all_results();  
@@ -171,6 +171,34 @@ class Finance_in_model extends MY_Model{
           $this->db->update('tb_finance_in', $info);
 
           return 0 ;
+     }
+
+     function Edit_Finance_in($info,$id)
+     {
+          $this->db->where('finance_in_id', $id);
+          $this->db->update('tb_finance_in', $info);
+          
+          $myObj = array(
+               'status' => 'ok',
+               'msg' =>  'Update ຂໍ້ມູນສຳເລັດ...',
+               'data' =>  $info,
+               'id' =>  $id
+               );
+
+          return  $myObj;
+     }
+
+     function delete_finance_in_detell($id){
+          $this->db->where('finance_in_id', $id);
+          $this->db->delete('tb_finance_in_detell');
+
+          $myObj = array(
+               'status' => 'ok',
+               'msg' =>  'delete ຂໍ້ມູນສຳເລັດ...'
+               );
+
+          return  $myObj;
+           
      }
 
      

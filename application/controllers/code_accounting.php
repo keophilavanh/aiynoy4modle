@@ -17,7 +17,7 @@ class code_accounting extends CI_Controller{
        
         if($this->Users_model->check_token())
         {
-            $this->load->view('conten/accounting/Other/view_deposit_accounts_model');
+            $this->load->view('conten/accounting/Other/view_code_accounting');
         }
     }
 
@@ -39,7 +39,7 @@ class code_accounting extends CI_Controller{
              $sub_array[] = $row->code;   
              $sub_array[] = $row->name;  
              $sub_array[] = $row->state;  
-             $sub_array[] = '<a href="#" id="'.$row->de_id.'" class="btn btn-pill btn-primary edit_data" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a> 
+             $sub_array[] = '<a href="#" id="'.$row->id.'" class="btn btn-pill btn-primary edit_data" data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i></a> 
                              ';  
             
              $data[] = $sub_array;  

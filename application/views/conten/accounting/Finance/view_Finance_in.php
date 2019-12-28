@@ -23,7 +23,7 @@
     ?>
 
     <div class="content p-4">
-        <h2 class="mb-4">ໃບອະຍຸມັດລາາຍຮັບ</h2>
+        <h2 class="mb-4">ໃບອະຍຸມັດລາຍຮັບ</h2>
 
         <div class="card mb-4">
             <div class="card-body">
@@ -106,7 +106,72 @@
           
 
 
+           $(document).on('click', '.Apply', function(){  
+                var finance_in_id = $(this).attr("id");  
+              
+                 swal({
+                        title: "ຢືນຢັນຂໍ້ມູນ",
+                        text: "ເຈົ້າຕ້ອງການຢືນຢັນຂໍ້ມູນ ຫຼື່ບໍ່!",
+                        icon: "warning",
+                        buttons: true,
+                        dangerMode: true,
+                        })
+                        .then((willDelete) => {
+                        if (willDelete) {
 
+                            $.ajax({  
+                                    url:"<?php echo base_url() . 'Finance_in/Apply_invoice'; ?>", 
+                                    method:"POST",  
+                                    data:{finance_in_id:finance_in_id},  
+                                    dataType:"json",  
+                                    success:function(data){  
+                                        dataTable.ajax.reload();
+                                        console.log("data");
+                                        console.log(data);
+                                        if(data.status=='ok'){
+
+                                          
+                                            
+                                                $.toast({
+                                                    heading: 'ແຈ້ງເຕືອນ!',
+                                                    text: data.msg,
+                                                    textFont: 'Saysettha OT',
+                                                    bgColor: '#009900',
+                                                    position: 'top-right',
+                                                    icon: 'success',
+                                                    loader: false,   
+                                                    loaderBg: '#ff6666',
+                                                    textColor: 'white'
+                                                })
+
+                                            
+                                            
+                                            dataTable.ajax.reload();
+                                            }else{
+
+
+                                            $.toast({
+                                                    heading: 'ແຈ້ງເຕືອນ!',
+                                                    text: data.msg,
+                                                    textFont: 'Saysettha OT',
+                                                    bgColor: '#cc3300',
+                                                    position: 'top-right',
+                                                    icon: 'error',
+                                                    loader: false,   
+                                                    loaderBg: '#ff6666',
+                                                    textColor: 'white'
+                                                })
+                                        }
+                                    }
+                                });
+                               
+                            
+                          
+                        }      
+                    }); 
+                
+                  
+            }); 
 
         
        

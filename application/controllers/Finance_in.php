@@ -47,9 +47,14 @@ class Finance_in extends CI_Controller{
              $sub_array[] = $row->status; 
              $sub_array[] = $row->username;  
 
-             $button ='<a href="'.base_url('Print-invoice-Finance-IN/').$row->finance_in_id.'" target="_blank" class="btn btn-pill btn-primary " data-toggle="tooltip" title="Print"><i class="fas fa-file-alt"></i> ພືມ</a>';
-             if($row->status == 'Normal'){
+             $button ='';
+             if($row->status == 'New'){
+               // $button .='<a href="'.base_url('Print-invoice-Finance-IN/').$row->finance_in_id.'" target="_blank" class="btn btn-pill btn-primary  " data-toggle="tooltip" title="Print"><i class="fas fa-file-alt"></i> ພືມ</a>';
+                $button .= '<a href="#" id="'.$row->finance_in_id.'" class="btn btn-pill btn-success  Apply" data-toggle="tooltip" title="Apply"><i class="fas fa-file-alt"></i> ຢືນຢັນ</a>';
+                $button .= '<a href="'.base_url('Edit-Finance-IN/').$row->finance_in_id.'" class="btn btn-pill btn-primary " data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i> ແກ້ໄຂ້</a>';
                 $button .= '<a href="#" id="'.$row->finance_in_id.'" class="btn btn-pill btn-danger edit_data" data-toggle="tooltip" title="Cancel"><i class="fas fa-file-alt"></i> ຍົກເລີກ</a>';
+             }else{
+                $button .='<a href="'.base_url('Print-invoice-Finance-IN/').$row->finance_in_id.'" target="_blank" class="btn btn-pill btn-primary  " data-toggle="tooltip" title="Print"><i class="fas fa-file-alt"></i> ພືມ</a>';
              }
 
              $sub_array[] = number_format($row->ticket_total,0).' '.$row->Rate; 
@@ -150,6 +155,20 @@ class Finance_in extends CI_Controller{
         
     }
 
+    public function Apply_invoice(){
+
+        date_default_timezone_set("Asia/Bangkok");
+        $data = array(
+            'status' => 'Apply',
+            'user_Apply' => $this->Users_model->get_username_token(),
+            'Date_Apply' => date("Y-m-d H:i:s")
+            );
+     
+
+            echo json_encode( $this->Finance_in_model->Edit_Status($data,$_POST["finance_in_id"]) );
+ 
+    }
+
  
 
     public function create_by_Finance_in(){
@@ -158,6 +177,19 @@ class Finance_in extends CI_Controller{
             $data['money_go'] = $this->money_go_model->select_item();
             $data['rate'] = $this->Rate_model->select_item();
             $this->load->view('conten/accounting/Finance/view_Create_Finance_in',$data,false);
+            
+        }
+        
+    }
+
+    public function edit_by_Finance_in($id){
+        if($this->Users_model->check_token())
+        {
+            $data['money_go'] = $this->money_go_model->select_item();
+            $data['rate'] = $this->Rate_model->select_item();
+            $data['ticket_data'] = $this->Finance_in_model->select_invoice($id);
+            $data['fetch_data'] = $this->Finance_in_model->select_item_by_invoice($id);
+            $this->load->view('conten/accounting/Finance/view_Edit_Finance_in',$data,false);
             
         }
         
@@ -192,7 +224,7 @@ class Finance_in extends CI_Controller{
                     'text_money' => $text_money,
                     'type_money' => $type_money,
 
-                    'status' => 'Normal',
+                    'status' => 'New',
                     'Rate' => $rate_name,
                     
                     'ticket_total' => $ticket_total,
@@ -224,6 +256,82 @@ class Finance_in extends CI_Controller{
                 'status' => 'ok',
                 'msg' =>  'ບັນທືກສຳເລັດ',
                 'ticket' =>  $invoice_id,
+                );
+
+        }else{
+            $myObj = array(
+                'status' => 'ON',
+                'msg' =>  'ບໍ່ສາມາດບັນທືກໄດ້',
+                );
+        }
+        
+
+        echo json_encode($myObj);
+    }
+
+
+    public function edit_Finance_in(){
+
+       
+        date_default_timezone_set("Asia/Bangkok");
+        $titel = $_POST["titel"];
+        $header = $_POST["header"];
+        $text_money = $_POST["text_money"];
+        $type_money = $_POST["type_money"];
+        //$date = $_POST["date"];invoid_id
+        $ticket_id = $_POST["invoid_id"];
+        
+
+        $ticket_total = $_POST["ticket_total"];
+        
+
+        $item_name = $_POST["item_name"];
+        $item_qty = $_POST["item_qty"];
+        $item_unit = $_POST["item_unit"];
+        $item_price = $_POST["item_price"];
+
+        $rate = $_POST["rate"];
+        $rate_name = $_POST["rate_name"];
+
+        $data_invoice = array(
+                    'Date' => date("Y-m-d H:i:s"),
+                    'tital' => $titel, 
+                    'header' => $header, 
+                    'text_money' => $text_money,
+                    'type_money' => $type_money,
+
+                    'status' => 'New',
+                    'Rate' => $rate_name,
+                    
+                    'ticket_total' => $ticket_total,
+                    'username' => $this->Users_model->get_username_token(),
+                    );
+        $this->Finance_in_model->Edit_Finance_in($data_invoice,$ticket_id);
+        $this->Finance_in_model->delete_finance_in_detell($ticket_id);
+
+        for($count = 0; $count < count($item_name); $count++)
+        {
+            $name = $item_name[$count];
+            $qty = $item_qty[$count];
+            $unit = $item_unit[$count];
+            $price = $item_price[$count];
+           
+            $data_detell = array(
+                'finance_in_id' => $ticket_id,
+                'Name' => $name, 
+                'Qty' => $qty, 
+                'Unit' => $unit,
+                'Price' => $price,
+               
+                
+                );
+            $this->Finance_in_model->add_item($data_detell);
+        }
+        if($ticket_id){
+            $myObj = array(
+                'status' => 'ok',
+                'msg' =>  'ບັນທືກສຳເລັດ',
+                'ticket' =>  $ticket_id,
                 );
 
         }else{
