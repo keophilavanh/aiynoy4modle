@@ -60,6 +60,8 @@ $route['Accounting'] = 'Accounting';
 $route['Vendor-invoice'] = 'vendor_invoice';
 $route['Create-invoice-Vendor/(:num)'] = 'vendor_invoice/create_by_vendor/$1';
 $route['Print-invoice-Vendor/(:num)'] = 'vendor_invoice/print_invoice/$1';
+$route['Report-Vendor-Invoice'] = 'vendor_invoice/report';
+$route['Print-Report-Vendor-Invoice'] = 'vendor_invoice/print_report';
 
 $route['Code-accounting'] = 'code_accounting';
 $route['Payment-Type'] = 'Payment_Type';
@@ -73,15 +75,23 @@ $route['Finance-IN'] = 'Finance_in';
 $route['Create-Finance-IN'] = 'Finance_in/create_by_Finance_in';
 $route['Edit-Finance-IN/(:num)'] = 'Finance_in/edit_by_Finance_in/$1';
 $route['Print-invoice-Finance-IN/(:num)'] = 'Finance_in/print_invoice/$1';
+$route['Report-Finance-IN'] = 'Finance_in/report';
+$route['Print-Report-Finance-IN'] = 'Finance_in/print_report';
 
 $route['Finance-Out'] = 'Finance_out';
 $route['Create-Finance-Out'] = 'Finance_out/create_by_Finance_out';
 $route['Edit-Finance-Out/(:num)'] = 'Finance_out/edit_by_Finance_out/$1';
 $route['Print-invoice-Finance-Out/(:num)'] = 'Finance_out/print_invoice/$1';
+$route['Report-Finance-Out'] = 'Finance_out/report';
+$route['Print-Report-Finance-Out'] = 'Finance_out/print_report';
+
+
 
 
 $route['Create-Voucher'] = 'Voucher/create_by_Voucher';
 $route['Print-Voucher/(:num)'] = 'Voucher/print_invoice/$1';
+$route['Report-Voucher'] = 'Voucher/report';
+$route['Print-Report-Voucher'] = 'Voucher/print_report';
 
 
 // $route['api/userlist'] = 'User/add';

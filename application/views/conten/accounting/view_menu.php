@@ -47,7 +47,19 @@
                     <li><a href="<?php echo base_url('Rate') ?>"><i class="fas fa-book"></i> ອັດຕາແລກປ່ຽກ </a></li>
                 </ul>
             </li>
-            <!-- <li><a href="<?php //echo base_url('Room') ?>"><i class="fa fa-fw fa-link"></i> ຈັດການຂໍ້ມູນຫ້ອງ</a></li> -->
+            <li>
+                <a href="#Report" data-toggle="collapse" > 
+                    <i class="fas fa-file-alt"></i> ລາຍງານ
+                </a>
+                <ul id="Report" class="list-unstyled collapse">
+                   
+                    <li><a href="<?php echo base_url('Report-Finance-IN') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບອະຍຸມັດລາຍຮັບ</a></li>
+                    <li><a href="<?php echo base_url('Report-Finance-Out') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບອະຍຸມັດລາຍຈ່າຍ</a></li>
+                    <li><a href="<?php echo base_url('Report-Vendor-Invoice') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບບິນຕິດໜີ້</a></li>
+                    <li><a href="<?php echo base_url('Report-Voucher') ?>"><i class="fas fa-file-alt"></i> ລາຍງານບັດຜ່ານບັນຊີ</a></li>
+
+                </ul>
+            </li>
             
             
         </ul>

@@ -139,6 +139,26 @@ class Voucher_model extends MY_Model{
           return $query->row();
      }
 
+     function report_by_voucher($project,$payment_type,$sub_code)
+     {
+          $this->db->select('*');
+          $this->db->from('tb_voucher_detell');
+          $this->db->where('pro_id', $project);
+          if($payment_type > 0){
+               $this->db->where('pay_id', $payment_type);
+          }
+
+          if($sub_code > 0){
+               $this->db->where('sub_code_id', $sub_code);
+          }
+          
+         
+          
+          $query = $this->db->get();  
+          return $query->result(); 
+     }
+    
+
      
 
    

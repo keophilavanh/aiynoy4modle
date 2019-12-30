@@ -149,6 +149,17 @@ class Vendor_invoice_model extends MY_Model{
           return 0 ;
      }
 
+     function report_invoice_vendor($Date_start,$Date_end)
+     {
+          $this->db->select('*');
+          $this->db->from('tb_invoice_vendor');
+          $this->db->join('tb_vendor','tb_vendor.vendor_id=tb_invoice_vendor.vendor_id');
+          $this->db->where("Date >='".$Date_start."' AND Date <='".$Date_end."'");
+          
+          $query = $this->db->get();  
+          return $query->result(); 
+     }
+
      
 
    

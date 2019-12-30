@@ -201,6 +201,16 @@ class Finance_in_model extends MY_Model{
            
      }
 
+     function report_finance_in($Date_start,$Date_end)
+     {
+          $this->db->select('*');
+          $this->db->from('tb_finance_in');
+          $this->db->where("Date_Apply >='".$Date_start."' AND Date_Apply <='".$Date_end."'");
+          
+          $query = $this->db->get();  
+          return $query->result(); 
+     }
+
      
 
    
