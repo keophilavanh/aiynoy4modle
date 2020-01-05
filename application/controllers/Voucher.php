@@ -460,6 +460,12 @@ class Voucher extends CI_Controller{
     public function print_report(){
         if($this->Users_model->check_token())
         {
+            if(isset($_POST["Export"])){
+                echo 'Export';
+                return false;
+            }
+
+
             $detell = '';  
           
             $i=0;
@@ -561,19 +567,19 @@ class Voucher extends CI_Controller{
                         <table border="0" cellspacing="0" cellpadding="3"> 
                         <tr>  
                             
-                            <th  align="center" ><font size="11">ວັນທີ :  ຫາວັນທີ : </font><br/> </th>  
+                            <th  align="center" ><font size="11"></font><br/> </th>  
                             
                         </tr>  
                        
                         </table>   
                         <table border="0.2" cellspacing="0" cellpadding="5">  
                             <tr>  
-                                    <th  width="8%" align="center" >ລຳດັບ</th> 
+                                    <th  width="10%" align="center" >ລຳດັບ</th> 
                                     <th  width="20%" align="Left" >ລະຫັດໂຄງການ</th> 
                                     <th  width="20%" align="center">ປະເພດລາຍຈ່າຍ</th> 
-                                    <th  width="15%" align="center">ລະຫັດຍ່ອຍປະເພດລາຍຈ່າຍ</th> 
-                                    <th  width="15%" align="center">ມູນຄ່າ</th>  
-                                    <th  width="20%" align="right">ສະກຸນເງິນ</th>  
+                                    <th  width="20%" align="center">ລະຫັດຍ່ອຍ</th> 
+                                    <th  width="20%" align="right">ມູນຄ່າ</th>  
+                                    <th  width="10%" align="center">ສະກຸນເງິນ</th>  
                                 
                             </tr> 
                        ';
@@ -611,6 +617,119 @@ class Voucher extends CI_Controller{
 
             $obj_pdf->writeHTML($content);  
             $obj_pdf->Output('file.pdf', 'I');
+            
+        }
+        
+    }
+
+    public function view_report(){
+        if($this->Users_model->check_token())
+        {
+           
+
+
+            $detell = '';  
+          
+            $i=0;
+            
+            $project = $_POST["project"];
+            $payment_type = $_POST["payment_type"];
+            $sub_code = $_POST["sub_code"];
+            
+            $fetch_data = $this->Voucher_model->report_by_voucher($project,$payment_type,$sub_code);
+            $i=0;
+         
+          
+
+            $kip_total = 0;
+            $thb_total = 0;
+            $usd_total = 0;
+
+
+            foreach($fetch_data as $row)  
+            {  
+              
+                $detell .='
+                    <tr>  
+                        <td  align="center">'.++$i.'</td> 
+                        <td  align="center"  >'.$this->Project_model->select_code($row->pro_id).'</td> 
+                        <td  align="center">'.$this->Payment_Type_model->select_code($row->pay_id).'</td>  
+                        <td  align="center">'.$this->Sub_code_model->select_code($row->sub_code_id).'</td>
+
+                        <td  align="right">'.number_format($row->credit_total,0).'</td>  
+                        <td  align="center">'.$row->Rate_Name.'</td>
+                
+                    </tr>
+                ';
+                
+           
+            
+            } 
+
+            $content='  <table  cellpadding="5" class="table table-bordered" id="test_table"  cellspacing="0" width="50%">  
+                                <tr>  
+                                        <th scope="col"  class="text-center" >ລຳດັບ</th> 
+                                        <th  scope="col" class="text-Left" >ລະຫັດໂຄງການ</th> 
+                                        <th  scope="col" class="text-center">ປະເພດລາຍຈ່າຍ</th> 
+                                        <th  scope="col" class="text-center">ລະຫັດຍ່ອຍ</th> 
+                                        <th  scope="col" class="text-right">ມູນຄ່າ</th>  
+                                        <th  scope="col" class="text-center">ສະກຸນເງິນ</th>  
+                                    
+                                </tr> 
+                        ';
+                $content .= $detell;
+                $content .='
+                                <tr>  
+                                    <td  align="center"> '.$i.' ບິນ </td>
+                                    <td colspan="4" align="center">ລວມຈຳນວນເງິນທັງຫມົດ </td>  
+                                    <td  align="right"></td>  
+                                    
+                            
+                                </tr>
+
+                            </table>
+                            <br/>
+
+                            <div class="form-group row">
+                                    
+                                    <div class="col-sm-5">
+                                        <table  cellpadding="5" class="table table-bordered" id="test_sum"  cellspacing="0" width="200px">  
+                                            <tr>  
+                                                    <th scope="col"  class="text-center" >ສະກຸນເງີນ</th> 
+                                                    <th scope="col" class="text-right" >ຈຳນວນເງີນ</th> 
+                                                
+                                            </tr>
+                                            <tr>  
+                                                    <th scope="col"  class="text-center" >ກີບ</th> 
+                                                    <th scope="col" class="text-right" >'.number_format($kip_total,0).'</th> 
+                                                
+                                            </tr>
+                                            <tr>  
+                                                    <th scope="col"  class="text-center" >ບາດ</th> 
+                                                    <th scope="col" class="text-right" >'.number_format($thb_total,0).'</th> 
+                                                
+                                            </tr>
+                                            <tr>  
+                                                    <th scope="col"  class="text-center" >ໂດລາ</th> 
+                                                    <th scope="col" class="text-right" >'.number_format($usd_total,0).'</th> 
+                                                
+                                            </tr>
+                                        </table>
+                                    </div>
+                                    
+                                    <div class="col-sm-5">
+                                           
+                                    </div>
+                                   
+                                   
+                            </div>
+
+                           
+                            
+                            '; 
+
+
+            echo $content;
             
         }
         

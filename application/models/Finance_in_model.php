@@ -127,6 +127,17 @@ class Finance_in_model extends MY_Model{
           return $query->result(); 
      }
 
+     function select_item_text($id)
+     {
+          $this->db->select('*');
+          $this->db->from('tb_finance_in_detell');
+          $this->db->where('finance_in_id', $id);
+          $this->db->limit(1,0);  
+          $query = $this->db->get();  
+          $row = $query->row();
+          return $row->Name; 
+     }
+
      function select_invoice($id)
      {
           $this->db->select('*');

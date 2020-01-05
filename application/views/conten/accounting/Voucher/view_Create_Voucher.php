@@ -48,6 +48,7 @@
                         <button type="button" class="btn btn-danger btn-lg" title="Select" name="Select" id="Select_Finance_out"  >ເລືອກໃບລາຍຈ່າຍ</button>
                         <input type="hidden" class="form-control" name="Finance_in" id="Finance_in" autocomplete="off" value="0" >
                         <input type="hidden" class="form-control" name="Finance_out" id="Finance_out" autocomplete="off" value="0" >
+                        <input type="hidden" class="form-control" name="text_data" id="text_data" autocomplete="off"  >
                         <!-- <input type="hidden" class="form-control" name="date" id="date" autocomplete="off" > -->
                         
                             <br/>
@@ -314,11 +315,12 @@
             var table = document.getElementById("Data_table");
             var count = table.rows.length ;
             var one_row = document.getElementById("Data_table").rows[1].cells.item(0).innerHTML;
-            if(one_row != 1){
-                count = 1;
-            }else{
-                return false;
-            }
+            var text = $('#text_data').val();
+            // if(one_row != 1){
+            //     count = 1;
+            // }else{
+            //     return false;
+            // }
 
             var project = '<select class="form-control form-control-lg selected2 item_project" style=" height:100px;"  >';
             project +=  '<?php     foreach($project as $row)  
@@ -380,7 +382,7 @@
             html_code += "<td align='left' contenteditable >"+project+"</td>";
             html_code += "<td align='center' contenteditable >"+payment_type+"</td>";
             html_code += "<td align='center' contenteditable >"+sub_code+"</td>";
-            html_code += "<td align='left' contenteditable class='item_text'></td>";
+            html_code += "<td align='left' contenteditable class='item_text'>"+text+"</td>";
             html_code += "<td align='right' contenteditable='false' >"+credit+"</td>";
             html_code += "<td align='right' contenteditable='false' >"+debit+"</td>";
             html_code += "<td align='right' contenteditable class='item_credit_total'></td>"; 
@@ -514,10 +516,12 @@
                
                 var data_code = this.getAttribute("data-code");
                 var data_Ticket = this.getAttribute("data-Ticket");
+                var data_text = this.getAttribute("data-text");
                   document.getElementById("show_vendor").innerHTML= 'ເອກະສານຢັ້ງຢືນ / Ref Doc  : '+data_Ticket;
                   $('#Finance_in').val(data_code);   
                   $('#add_data_Modal_in').modal('hide');  
                   $('#Finance_out').val(0);   
+                  $('#text_data').val(data_text);   
                 
                 
               
@@ -528,11 +532,13 @@
                
                 var data_code = this.getAttribute("data-code");
                 var data_Ticket = this.getAttribute("data-Ticket");
+                var data_text = this.getAttribute("data-text");
                  
                   document.getElementById("show_vendor").innerHTML= 'ເອກະສານຢັ້ງຢືນ / Ref Doc  : '+data_Ticket;
                   $('#Finance_in').val(0);   
                   $('#add_data_Modal_out').modal('hide');  
-                  $('#Finance_out').val(data_code);   
+                  $('#Finance_out').val(data_code);  
+                  $('#text_data').val(data_text);    
                 
               
             });
@@ -559,7 +565,7 @@
                     });  
 
                 }
-                else if(x != 1 ){
+                else if(x <= 0 ){
 
                     swal({
                             title: "ບໍ່ມີລາຍການ",

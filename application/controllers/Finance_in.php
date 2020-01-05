@@ -105,9 +105,10 @@ class Finance_in extends CI_Controller{
          $sub_array[] = $row->Date;  
          $sub_array[] = number_format($row->ticket_total,0).' '.$row->Rate; 
          $sub_array[] = $row->username;  
+         $name = $this->Finance_in_model->select_item_text($row->finance_in_id);
 
          
-         $sub_array[] = '<a href="#" data-code="'.$row->finance_in_id.'"  data-Ticket="'.$row->Ticket_No.'"  class="btn btn-pill btn-primary Finance_in" data-toggle="tooltip" title="Select"><i class="fas fa-file-alt"></i> ເລືອກ </a>
+         $sub_array[] = '<a href="#" data-code="'.$row->finance_in_id.'"  data-Ticket="'.$row->Ticket_No.'" data-text="'.$name.'"  class="btn btn-pill btn-primary Finance_in" data-toggle="tooltip" title="Select"><i class="fas fa-file-alt"></i> ເລືອກ </a>
                         
                          ';  
         
@@ -493,7 +494,19 @@ class Finance_in extends CI_Controller{
                                     <th  height="150px" align="center" ><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> ຊື່ ................................................ </th> 
                                     
                                 </tr> 
-                        </table>    
+                        </table> 
+                        <table border="0" cellspacing="0" cellpadding="5"> 
+                       
+                        <tr>  
+                            
+                            <th align="center" > </th>  
+                            <th align="center" >  </th> 
+                            <th  >ຜູ້ສ້າງ : '.$ticket_data->username.'<br/>
+                            ຜູ້ອະນຸມັດ : '.$ticket_data->user_Apply.'
+                            </th> 
+                        
+                        </tr> 
+                    </table>   
             ';
 
             $obj_pdf->writeHTML($content);  

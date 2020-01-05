@@ -34,25 +34,25 @@
                 </center>
                 <br/>
                 <br/>
-                <form name="myForm" id="myForm" action="Print-Report-Voucher" target="_blank" method="post" autocomplete="off" onsubmit="return toSubmit();" >
-                    <div class="">
-                      
-                                <div class=" container ">
-                                        <div class="col-sm-4 container">
-                                                <h4>ໂຄງການ :</h4>
-                                                <select class="form-control form-control-lg selected2  "  name="project" id="project"> 
+                <form name="myForm" id="myForm" action="Print-Report-Voucher" target="_blank" method="post" autocomplete="off"  >
+                    <div class="container">
+                        <center>
+                            <table>
+                                <tr>
+                                    <td>
+                                        <h4>ໂຄງການ :</h4>
+                                        <select class="form-control form-control-lg selected2  "  name="project" id="project"> 
                                                    
                                                     <?php   foreach($project as $row)  
                                                         {  
                                                         echo '<option value="'.$row->pro_id.'"> '.$row->Name.'</option>';
                                                         } 
                                                     ?>
-                                                </select>
-                                        </div>
-                                        <div class="col-sm-4 container">
-                                                <br/>
-                                                <h4>ປະເພດການຈ່າຍ :</h4>
-                                                <select class="form-control form-control-lg selected2 "  name="payment_type" id="payment_type"> 
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <h4>ປະເພດການຈ່າຍ :</h4>
+                                        <select class="form-control form-control-lg selected2 "  name="payment_type" id="payment_type"> 
                                                     <option value="0"> ບໍ່ໍ່ເລືອກຂໍ້ມູນ </option>
                                                     <?php   
                                                         foreach($Payment_Type as $row)  
@@ -60,23 +60,43 @@
                                                         echo '<option value="'.$row->pay_id.'"> '.$row->Name.'</option>';
                                                         } 
                                                     ?>
-                                                </select>
-                                        </div>
-                                        <div class="col-sm-4 container">
-                                                <br/>
-                                                <h4>ລະຫັດຍ່ອຍ :</h4>
-                                                <select class="form-control form-control-lg selected2 " name="sub_code" id="sub_code" > 
-                                                    <option value="0"> ບໍ່ໍ່ເລືອກຂໍ້ມູນ </option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <h4>ລະຫັດຍ່ອຍ :</h4>
+                                        <select class="form-control form-control-lg selected2 " name="sub_code" id="sub_code" > 
+                                        <option value="0"> ບໍ່ໍ່ເລືອກຂໍ້ມູນ </option>
                                                     <?php   
                                                         foreach($sub_code as $row)  
                                                         {  
                                                         echo '<option value="'.$row->sub_code_id.'"> '.$row->Name.'</option>';
                                                         } 
                                                     ?>
-                                                </select>
-                                        </div>
-                                                
-                                </div>
+                                        </select>
+                                        
+                                    
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                            <br/>
+                                            <button type="submit" name="PDF" id="PDF"  class="btn btn-primary btn-lg print"><i class="fas fa-file-alt"></i> &nbsp; PDF  &nbsp; &nbsp;</button>
+                                    </td>
+                                    <td>
+                                            <br/>
+                                            <button type="submit" name="Export" id="Export"  class="btn btn-primary btn-lg print"><i class="fas fa-file-alt"></i> &nbsp; Export  &nbsp; &nbsp;</button>
+                                    </td>
+                                    </form>
+                                    <td>
+                                            <br/>
+                                            <button type="button" name="view" id="view"  class="btn btn-primary btn-lg print"><i class="fas fa-file-alt"></i> &nbsp; ລາຍງານ  &nbsp; &nbsp; </button>
+                                    </td>
+                                       
+                                
+                                </tr>
+                            </table>
+                        <center>             
+                               
                               
                         
 
@@ -91,15 +111,17 @@
                     <br/>
                     <br/>
 
-                    <center>
+                    <!-- <center>
                         <button type="submit" name="insert" id="insert"  class="btn btn-primary btn-lg print"><i class="fas fa-file-alt"></i> &nbsp; ພືມລາຍງານ </button>
                     
-                    </center>
+                    </center> -->
                     
                 
                     
                     </div>
-                </form>
+                    <div id="table_view">
+                    </div>
+                
             </div>
             
 
@@ -153,6 +175,35 @@
              $('#linkClose').click(function () {
                 $('#myAlert').hide('fade');
             });
+
+            $(document).on('click', '#view', function(){  
+                var project = $('#project').val()
+                var payment_type = $('#payment_type').val()
+                var sub_code = $('#sub_code').val() 
+              
+                
+                $.ajax({  
+                    url:"<?php echo base_url() . 'Voucher/view_report'; ?>", 
+                    method:"POST",  
+                    data:{
+                        project:project,
+                        payment_type:payment_type,
+                        sub_code:sub_code,
+                    
+                    },  
+                    dataType:"text",  
+                    success:function(data){ 
+                        $('#test_table').remove(); 
+                        $('#test_sum').remove(); 
+                        
+                        $('#table_view').append(data);
+                    }  
+                });  
+            });
+
+            
+       
+
 
             
         });

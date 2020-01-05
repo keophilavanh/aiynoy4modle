@@ -144,6 +144,7 @@ class Voucher_model extends MY_Model{
           $this->db->select('*');
           $this->db->from('tb_voucher_detell');
           $this->db->where('pro_id', $project);
+          
           if($payment_type > 0){
                $this->db->where('pay_id', $payment_type);
           }

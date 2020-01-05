@@ -107,7 +107,8 @@ class Finance_out extends CI_Controller{
          $sub_array[] = $row->Date;  
          $sub_array[] = number_format($row->ticket_total,0).' '.$row->Rate; 
          $sub_array[] = $row->username;  
-         $sub_array[] = '<a href="#"  data-code="'.$row->finance_out_id.'"  data-Ticket="'.$row->Ticket_No.'" class="btn btn-pill btn-primary Finance_out" data-toggle="tooltip" title="Select"><i class="fas fa-file-alt"></i> ເລືອກ</a>
+         $name = $this->Finance_out_model->select_item_text($row->finance_out_id);
+         $sub_array[] = '<a href="#"  data-code="'.$row->finance_out_id.'"  data-Ticket="'.$row->Ticket_No.'" data-text="'.$name.'" class="btn btn-pill btn-primary Finance_out" data-toggle="tooltip" title="Select"><i class="fas fa-file-alt"></i> ເລືອກ</a>
                          
                          ';  
         
@@ -459,7 +460,7 @@ class Finance_out extends CI_Controller{
                         <table border="0" cellspacing="0" cellpadding="3"> 
                         <tr>  
                             
-                            <th  ><font size="11">ຊື່ງມີລາຍລະອຽດດັ່ງລຸ່ມນ</font><br/> </th>  
+                            <th  ><font size="11">ຊື່ງມີລາຍລະອຽດດັ່ງລຸ່ມນີ້:</font><br/> </th>  
                             <th align="center" width="38%">
   
                             </th>
@@ -513,7 +514,20 @@ class Finance_out extends CI_Controller{
                                     <th  height="150px" align="center" ><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/> ຊື່ ................................................ </th> 
                                     
                                 </tr> 
+                               
                         </table>    
+                        <table border="0" cellspacing="0" cellpadding="5"> 
+                       
+                            <tr>  
+                                
+                                <th align="center" > </th>  
+                                <th align="center" >  </th> 
+                                <th  >ຜູ້ສ້າງ : '.$ticket_data->username.'<br/>
+                                ຜູ້ອະນຸມັດ : '.$ticket_data->user_Apply.'
+                                </th> 
+                            
+                            </tr> 
+                        </table>
             ';
 
             $obj_pdf->writeHTML($content);  
