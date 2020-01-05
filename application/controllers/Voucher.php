@@ -77,6 +77,7 @@ class Voucher extends CI_Controller{
             $sub_array[] = '';  
             $sub_array[] = '';  
             $sub_array[] = '';  
+            $sub_array[] = '';  
          
            
             $data[] = $sub_array;  
@@ -476,6 +477,9 @@ class Voucher extends CI_Controller{
             
             $fetch_data = $this->Voucher_model->report_by_voucher($project,$payment_type,$sub_code);
             $i=0;
+            $kip_total =0;
+            $thb_total =0;
+            $usd_total =0;
          
             $credit_total = 0;
             $debit_total = 0;
@@ -498,6 +502,18 @@ class Voucher extends CI_Controller{
                 
                     </tr>
                 ';
+
+                if($row->Rate_Name == 'ກີບ'){
+                    $kip_total += $row->credit_total;
+                }
+                if($row->Rate_Name == 'ບາດ'){
+                    $thb_total += $row->credit_total;
+                }
+                if($row->Rate_Name == 'ໂດລາ'){
+                    $usd_total += $row->credit_total;
+                }
+                
+               
                
             
             } 
@@ -584,17 +600,43 @@ class Voucher extends CI_Controller{
                             </tr> 
                        ';
             $content .= $detell;
-            $content .='
-                            <tr>  
-                                <td  align="center"> '.$i.' ບິນ </td>
-                                <td colspan="4" align="center">ລວມຈຳນວນເງິນທັງຫມົດ </td>  
-                                <td  align="right"></td>  
-                                
+
+            $text =' <tr>  
+                        <td  align="center"> '.$i.' ບິນ </td>
+                        <td colspan="4" align="center">ລວມຈຳນວນເງິນທັງຫມົດ </td>  
+                        <td  align="right"></td>  
                         
-                            </tr>
+                
+                    </tr>';
+
+            $content .='
+                           
             
                         </table>';  
             $content .='
+                        <br/><br/>
+                        <table border="0.2" cellspacing="0" cellpadding="5"> 
+                            <tr>  
+                                    <th width="20%" scope="col"  align="center" >ສະກຸນເງີນ</th> 
+                                    <th width="20%" scope="col" align="right" >ຈຳນວນເງີນ</th> 
+                                
+                            </tr>
+                            <tr>  
+                                    <th scope="col" align="center" >ກີບ</th> 
+                                    <th scope="col" align="right" >'.number_format($kip_total,0).'</th> 
+                                
+                            </tr>
+                            <tr>  
+                                    <th scope="col" align="center" >ບາດ</th> 
+                                    <th scope="col" align="right" >'.number_format($thb_total,0).'</th> 
+                                
+                            </tr>
+                            <tr>  
+                                    <th scope="col" align="center" >ໂດລາ</th> 
+                                    <th scope="col" align="right" >'.number_format($usd_total,0).'</th> 
+                                
+                            </tr>
+                        </table> 
                         <br/><br/><br/>
                         <table border="0" cellspacing="0" cellpadding="5"> 
                                 
@@ -637,18 +679,31 @@ class Voucher extends CI_Controller{
             $sub_code = $_POST["sub_code"];
             
             $fetch_data = $this->Voucher_model->report_by_voucher($project,$payment_type,$sub_code);
+           
             $i=0;
          
           
 
-            $kip_total = 0;
-            $thb_total = 0;
-            $usd_total = 0;
+            //$kip_total = $this->Voucher_model->report_by_sum_money_voucher($project,$payment_type,$sub_code,'ກີບ');
+            //$thb_total = $this->Voucher_model->report_by_sum_money_voucher($project,$payment_type,$sub_code,'ບາດ');
+            //$usd_total = $this->Voucher_model->report_by_sum_money_voucher($project,$payment_type,$sub_code,'ໂດລາ');
 
+            $kip_total =0;
+            $thb_total =0;
+            $usd_total =0;
 
             foreach($fetch_data as $row)  
             {  
-              
+                if($row->Rate_Name == 'ກີບ'){
+                    $kip_total += $row->credit_total;
+                }
+                if($row->Rate_Name == 'ບາດ'){
+                    $thb_total += $row->credit_total;
+                }
+                if($row->Rate_Name == 'ໂດລາ'){
+                    $usd_total += $row->credit_total;
+                }
+                
                 $detell .='
                     <tr>  
                         <td  align="center">'.++$i.'</td> 
@@ -661,7 +716,7 @@ class Voucher extends CI_Controller{
                 
                     </tr>
                 ';
-                
+              
            
             
             } 
@@ -679,13 +734,7 @@ class Voucher extends CI_Controller{
                         ';
                 $content .= $detell;
                 $content .='
-                                <tr>  
-                                    <td  align="center"> '.$i.' ບິນ </td>
-                                    <td colspan="4" align="center">ລວມຈຳນວນເງິນທັງຫມົດ </td>  
-                                    <td  align="right"></td>  
-                                    
-                            
-                                </tr>
+                              
 
                             </table>
                             <br/>

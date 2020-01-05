@@ -82,10 +82,10 @@
                                             <br/>
                                             <button type="submit" name="PDF" id="PDF"  class="btn btn-primary btn-lg print"><i class="fas fa-file-alt"></i> &nbsp; PDF  &nbsp; &nbsp;</button>
                                     </td>
-                                    <td>
+                                    <!-- <td>
                                             <br/>
                                             <button type="submit" name="Export" id="Export"  class="btn btn-primary btn-lg print"><i class="fas fa-file-alt"></i> &nbsp; Export  &nbsp; &nbsp;</button>
-                                    </td>
+                                    </td> -->
                                     </form>
                                     <td>
                                             <br/>
@@ -119,7 +119,17 @@
                 
                     
                     </div>
-                    <div id="table_view">
+                   
+                    <div  class=" px-md-2" >
+                        <div class="d-none card mb-4" id="card_data" >
+                            <div class="card-header bg-white font-weight-bold">
+                                ສະຫຼຸບລາຍງານ
+                            </div>
+                            <div class="card-body" id="table_view">
+                               
+                            </div>
+                            
+                        </div>
                     </div>
                 
             </div>
@@ -180,7 +190,8 @@
                 var project = $('#project').val()
                 var payment_type = $('#payment_type').val()
                 var sub_code = $('#sub_code').val() 
-              
+                var element = document.getElementById("card_data");
+                element.classList.remove("d-none");
                 
                 $.ajax({  
                     url:"<?php echo base_url() . 'Voucher/view_report'; ?>", 
@@ -193,11 +204,16 @@
                     },  
                     dataType:"text",  
                     success:function(data){ 
-                        $('#test_table').remove(); 
-                        $('#test_sum').remove(); 
                         
-                        $('#table_view').append(data);
+                        $('#show_report').remove(); 
+                        
+                        $('#table_view').append('<div id="show_report" >'+data+'</div>');
+                       
+
+                        
+                       
                     }  
+
                 });  
             });
 
