@@ -48,7 +48,7 @@ class vendor_invoice extends CI_Controller{
              $sub_array[] = $row->amount;
              $sub_array[] = $row->ticket_total;  
              $sub_array[] = $row->username;  
-             $sub_array[] = '<a href="'.base_url('Print-invoice-Vendor/').$row->invoice_id.'" target="_blank" class="btn btn-pill btn-primary edit_data" data-toggle="tooltip" title="Printer"><i class="fas fa-file-alt"></i></a> 
+             $sub_array[] = '<a href="'.base_url('Print-invoice-Vendor/').$row->invoice_id.'" target="_blank" class="btn btn-pill btn-primary edit_data"  title="Printer"><i class="fas fa-file-alt"></i></a> 
                              ';  
             
              $data[] = $sub_array;  
@@ -100,7 +100,7 @@ class vendor_invoice extends CI_Controller{
         
          $sub_array[] = $row->amount.' '.$row->rate_name;
          
-         $sub_array[] = '<a href="#" id="'.$row->invoice_id.'" class="btn btn-pill btn-primary edit_data" data-toggle="tooltip" title="ເລືອກ"> ເລືອກ </a> 
+         $sub_array[] = '<a href="#" id="'.$row->invoice_id.'" class="btn btn-pill btn-primary edit_data"  title="ເລືອກ"> ເລືອກ </a> 
                          ';  
         
          $data[] = $sub_array;  

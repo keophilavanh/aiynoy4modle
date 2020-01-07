@@ -50,11 +50,11 @@ class Finance_out extends CI_Controller{
              $button ='';
              if($row->status == 'New'){
                
-                $button .= '<a href="#" data-code="'.$row->finance_out_id.'" data-vendor="'.$row->invoice_vendor_id.'" data-Ticket="'.$row->ticket_total.'" class="btn btn-pill btn-success  Apply" data-toggle="tooltip" title="Apply"><i class="fas fa-file-alt"></i> ຢືນຢັນ</a>';
-                $button .= '<a href="'.base_url('Edit-Finance-Out/').$row->finance_out_id.'" class="btn btn-pill btn-primary " data-toggle="tooltip" title="Edit"><i class="fa fa-fw fa-edit"></i> ແກ້ໄຂ້</a>';
-                $button .= '<a href="#" id="'.$row->finance_out_id.'" class="btn btn-pill btn-danger edit_data" data-toggle="tooltip" title="Cancel"><i class="fas fa-file-alt"></i> ຍົກເລີກ</a>';
+                $button .= '<a href="#" data-code="'.$row->finance_out_id.'" data-vendor="'.$row->invoice_vendor_id.'" data-Ticket="'.$row->ticket_total.'" class="btn btn-pill btn-success  Apply"  title="Apply"><i class="fas fa-file-alt"></i> ຢືນຢັນ</a>';
+                $button .= '<a href="'.base_url('Edit-Finance-Out/').$row->finance_out_id.'" class="btn btn-pill btn-primary "  title="Edit"><i class="fa fa-fw fa-edit"></i> ແກ້ໄຂ້</a>';
+                $button .= '<a href="#" id="'.$row->finance_out_id.'" class="btn btn-pill btn-danger edit_data"  title="Cancel"><i class="fas fa-file-alt"></i> ຍົກເລີກ</a>';
              }else{
-                $button .='<a href="'.base_url('Print-invoice-Finance-Out/').$row->finance_out_id.'" target="_blank" class="btn btn-pill btn-primary " data-toggle="tooltip" title="Print"><i class="fas fa-file-alt"></i> ພືມ</a>';
+                $button .='<a href="'.base_url('Print-invoice-Finance-Out/').$row->finance_out_id.'" target="_blank" class="btn btn-pill btn-primary "  title="Print"><i class="fas fa-file-alt"></i> ພືມ</a>';
              }
 
              $sub_array[] = number_format($row->ticket_total,0).' '.$row->Rate; 

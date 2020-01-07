@@ -62,8 +62,8 @@ class Voucher extends CI_Controller{
              $sub_array[] = $row->status; 
              $sub_array[] = $row->username;  
             
-             $sub_array[] = '<a href="'.base_url('Print-Voucher/').$row->voucher_id.'" target="_blank" class="btn btn-pill btn-primary " data-toggle="tooltip" title="Print"><i class="fas fa-file-alt"></i> ພືມ</a>
-                             <a href="#" id="'.$row->voucher_id.'" class="btn btn-pill btn-danger edit_data" data-toggle="tooltip" title="Cancel"><i class="fas fa-file-alt"></i> ຍົກເລີກ</a>
+             $sub_array[] = '<a href="'.base_url('Print-Voucher/').$row->voucher_id.'" target="_blank" class="btn btn-pill btn-primary "  title="Print"><i class="fas fa-file-alt"></i> ພືມ</a>
+                             <a href="#" id="'.$row->voucher_id.'" class="btn btn-pill btn-danger edit_data"  title="Cancel"><i class="fas fa-file-alt"></i> ຍົກເລີກ</a>
                              ';  
             
              $data[] = $sub_array;  
