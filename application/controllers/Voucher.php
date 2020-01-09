@@ -474,8 +474,9 @@ class Voucher extends CI_Controller{
             $project = $_POST["project"];
             $payment_type = $_POST["payment_type"];
             $sub_code = $_POST["sub_code"];
+            $template = $_POST["template"];
             
-            $fetch_data = $this->Voucher_model->report_by_voucher($project,$payment_type,$sub_code);
+            $fetch_data = $this->Voucher_model->report_by_voucher($project,$payment_type,$sub_code,$template);
             $i=0;
             $kip_total =0;
             $thb_total =0;
@@ -677,8 +678,10 @@ class Voucher extends CI_Controller{
             $project = $_POST["project"];
             $payment_type = $_POST["payment_type"];
             $sub_code = $_POST["sub_code"];
+            $template = $_POST["template"];
             
-            $fetch_data = $this->Voucher_model->report_by_voucher($project,$payment_type,$sub_code);
+            
+            $fetch_data = $this->Voucher_model->report_by_voucher($project,$payment_type,$sub_code,$template);
            
             $i=0;
          

@@ -23,6 +23,7 @@
     <script src="<?php echo base_url('assets/js/jquery.toast.js') ?>"></script>
     <script src="<?php echo base_url('assets/js/jquery.datetimepicker.full') ?>"></script>
     <script src="<?php echo base_url('assets/js/select2.full.js') ?>"></script>
+    <script src="<?php echo base_url('assets/js/text_number_to_string.js') ?>"></script>
 
   
  

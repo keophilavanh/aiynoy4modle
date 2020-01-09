@@ -139,10 +139,11 @@ class Voucher_model extends MY_Model{
           return $query->row();
      }
 
-     function report_by_voucher($project,$payment_type,$sub_code)
+     function report_by_voucher($project,$payment_type,$sub_code,$template)
      {
           $this->db->select('pro_id,pay_id,sub_code_id,sum(credit_total) as credit_total,sum(debit_total) as debit_total, sum(old_total) as old_total ,Rate_Name');
           $this->db->from('tb_voucher_detell');
+          $this->db->join('tb_voucher','tb_voucher.voucher_id=tb_voucher_detell.voucher_id');
           $this->db->where('pro_id', $project);
           
           if($payment_type > 0){
@@ -152,6 +153,11 @@ class Voucher_model extends MY_Model{
           if($sub_code > 0){
                $this->db->where('sub_code_id', $sub_code);
           }
+
+          if($template != "0"){
+              $this->db->where('template',$template);
+          }
+          
           $this->db->group_by('pro_id,pay_id,sub_code_id,Rate_Name'); 
          
           

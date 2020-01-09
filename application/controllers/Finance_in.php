@@ -364,7 +364,7 @@ class Finance_in extends CI_Controller{
             foreach($fetch_data as $row)  
             {  
                
-                $total_ticket += $row->Price;
+                $total_ticket += ($row->Qty*$row->Price);
                 $detell .='
                     <tr>  
                         <td  align="center">'.++$i.'</td> 

@@ -56,6 +56,7 @@
                     <li><a href="<?php echo base_url('Report-Finance-IN') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບອະຍຸມັດລາຍຮັບ</a></li>
                     <li><a href="<?php echo base_url('Report-Finance-Out') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບອະຍຸມັດລາຍຈ່າຍ</a></li>
                     <li><a href="<?php echo base_url('Report-Vendor-Invoice') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບບິນຕິດໜີ້</a></li>
+                    <li><a href="<?php echo base_url('Report-Vendor-Invoice') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໜີ້ສິນ ຕາມເຈົ້າໜີ້</a></li>
                     <li><a href="<?php echo base_url('Report-Voucher') ?>"><i class="fas fa-file-alt"></i> ລາຍງານບັດຜ່ານບັນຊີ</a></li>
 
                 </ul>

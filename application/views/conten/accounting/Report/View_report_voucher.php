@@ -76,6 +76,17 @@
                                         
                                     
                                     </td>
+                                    <td>
+                                        <h4>ຮູບແບບ :</h4>
+                                        <select class="form-control form-control-lg selected2 " name="template" id="template" > 
+                                        <option value="0"> ບໍ່ໍ່ເລືອກຂໍ້ມູນ </option>
+                                        <option value="ແບບທີ1"> ແບບທີ1 </option>
+                                        <option value="ແບບທີ2"> ແບບທີ2 </option>
+                                                  
+                                        </select>
+                                        
+                                    
+                                    </td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -190,6 +201,7 @@
                 var project = $('#project').val()
                 var payment_type = $('#payment_type').val()
                 var sub_code = $('#sub_code').val() 
+                var template = $('#template').val() 
                 var element = document.getElementById("card_data");
                 element.classList.remove("d-none");
                 
@@ -200,7 +212,7 @@
                         project:project,
                         payment_type:payment_type,
                         sub_code:sub_code,
-                    
+                        template:template
                     },  
                     dataType:"text",  
                     success:function(data){ 

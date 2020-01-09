@@ -205,7 +205,7 @@
 
             document.getElementById("total_ticket").innerHTML= 'ລວມເງີນ : '+conver_number_to_string(total_price)+' '+rate_name;
            // document.getElementById("total_ticket_kip").innerHTML= 'ລວມເງີນກີບ : '+conver_number_to_string(total_price_kip)+' ກີບ';
-            //$('#total_ticket').val(total_price); 
+           $('#text_money').val(text_number_to_string(total_price)+rate_name);
 
             return total_price;
         }
