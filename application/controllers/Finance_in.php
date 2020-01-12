@@ -43,7 +43,7 @@ class Finance_in extends CI_Controller{
              $sub_array[] = $row->Ticket_No;   
             //  $sub_array[] = $row->tital;  
             //  $sub_array[] = $row->header;  
-             $sub_array[] = $row->Date;  
+             $sub_array[] = date("d-m-Y", strtotime($row->Date)) ;  
              $sub_array[] = $row->status; 
              $sub_array[] = $row->username;  
 

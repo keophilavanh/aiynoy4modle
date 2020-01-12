@@ -16,14 +16,24 @@
                     <i class="fas fa-chart-line"></i> ການບັນຊີ
                 </a>
                 <ul id="account" class="list-unstyled collapse">
-                    <li><a href="<?php echo base_url('Voucher') ?>"><i class="fas fa-pencil-alt"></i> ບັດຜ່ານບັນຊີ </a></li>
+                    <li><a href="<?php echo base_url('Voucher') ?>"><i class="fab fa-accusoft"></i> ບັດຜ່ານບັນຊີ </a></li>
+                    
+                </ul>
+            </li>
+
+            <li>
+                <a href="#plan" data-toggle="collapse" > 
+                    <i class="fas fa-university"></i> ການທະນາຄານ
+                </a>
+                <ul id="plan" class="list-unstyled collapse">
+                    <li><a href="<?php echo base_url('Bank-Account-List') ?>"><i class="fas fa-pencil-alt"></i>   ແຜນລາຍຈ່າຍ </a></li>
                     
                 </ul>
             </li>
            
             <li>
                 <a href="#vendor" data-toggle="collapse" > 
-                    <i class="fas fa-file-alt"></i> ການຕິດຕາມໜີ້
+                <i class="fas fa-file-alt"></i> ການຕິດຕາມໜີ້
                 </a>
                 <ul id="vendor" class="list-unstyled collapse">
                     <li><a href="<?php echo base_url('Vendor-invoice') ?>"><i class="fas fa-file-alt"></i> ໃບບິນຕິດໜີ້</a></li>
@@ -45,6 +55,9 @@
                     <li><a href="<?php echo base_url('Book-Accounting') ?>"><i class="fas fa-book"></i> ປື້ມບັນຊີ </a></li>
                     <li><a href="<?php echo base_url('Money-Go') ?>"><i class="fas fa-book"></i> ປາຍທາງການເງີນ </a></li>
                     <li><a href="<?php echo base_url('Rate') ?>"><i class="fas fa-book"></i> ອັດຕາແລກປ່ຽກ </a></li>
+                    <li><a href="<?php echo base_url('bank') ?>"><i class="fas fa-university"></i> ທະນາຄານ </a></li>
+                    <li><a href="<?php echo base_url('Bank-Account') ?>"><i class="fab fa-btc"></i> ບັນຊີທະນາຄານ </a></li>
+                    
                 </ul>
             </li>
             <li>
@@ -56,7 +69,7 @@
                     <li><a href="<?php echo base_url('Report-Finance-IN') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບອະຍຸມັດລາຍຮັບ</a></li>
                     <li><a href="<?php echo base_url('Report-Finance-Out') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບອະຍຸມັດລາຍຈ່າຍ</a></li>
                     <li><a href="<?php echo base_url('Report-Vendor-Invoice') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບບິນຕິດໜີ້</a></li>
-                    <li><a href="<?php echo base_url('Report-Vendor-Invoice') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໜີ້ສິນ ຕາມເຈົ້າໜີ້</a></li>
+                    <li><a href="<?php echo base_url('Report-Vendor-Invoice-Report-By-Vendor-Id') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໜີ້ສິນ ຕາມເຈົ້າໜີ້</a></li>
                     <li><a href="<?php echo base_url('Report-Voucher') ?>"><i class="fas fa-file-alt"></i> ລາຍງານບັດຜ່ານບັນຊີ</a></li>
 
                 </ul>

@@ -10,6 +10,7 @@ class vendor_invoice extends CI_Controller{
         parent::__construct();
         $this->load->model('Users_model');
         $this->load->model('Vendor_model');
+        $this->load->model('Sub_code_model');
         $this->load->model('Vendor_invoice_model');
         $this->load->model('Rate_model'); 
         $this->load->model('Finance_out_model');
@@ -412,6 +413,16 @@ class vendor_invoice extends CI_Controller{
         }
     }
 
+    public function report_by_vendor(){
+       
+        if($this->Users_model->check_token())
+        {
+            $data['vendor'] = $this->Vendor_model->select_item();
+           
+            $this->load->view('conten/accounting/Report/View_report_by_vender_id',$data,false);
+        }
+    }
+
     public function print_report(){
         if($this->Users_model->check_token())
         {
@@ -561,6 +572,150 @@ class vendor_invoice extends CI_Controller{
         }
         
     }
+
+
+    public function print_report_by_vendor_id(){
+        if($this->Users_model->check_token())
+        {
+            $detell = '';  
+            $vendor_id = $_POST["vendor_id"];
+            
+            $fetch_data = $this->Vendor_invoice_model->report_invoice_by_vendor_id($vendor_id);
+            $i=0;
+            $total_kip = 0;
+            $total_bath= 0;
+            $total_usd= 0;
+            foreach($fetch_data as $row)  
+            {  
+               
+                $i++;
+                $detell .='
+                    <tr>  
+                        
+                        <td  align="center"  >'.$row->invoice_id.'</td> 
+                        <td  align="Left">'.$row->vendor_name.'</td>  
+                        <td  align="center">'.$row->Date.'</td>
+                        <td  align="center">'.$row->status.'</td>
+                        <td  align="center">'.$row->username.'</td>  
+                        <td  align="center">'.$row->rate_name.'</td>
+                        <td  align="right">'.number_format($row->amount,0).'</td>  
+                
+                    </tr>
+                ';
+               
+            
+            } 
+
+
+            
+            $this->load->library('Pdf');
+
+            
+
+
+            $obj_pdf = new TCPDF('P', PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);  
+            $obj_pdf->SetCreator(PDF_CREATOR);  
+            $obj_pdf->SetTitle("Invoice Finance In");  
+            $obj_pdf->SetHeaderData('', '', PDF_HEADER_TITLE, PDF_HEADER_STRING);  
+            $obj_pdf->setHeaderFont(Array(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN));  
+            $obj_pdf->setFooterFont(Array(PDF_FONT_NAME_DATA, '', PDF_FONT_SIZE_DATA));  
+            $obj_pdf->SetDefaultMonospacedFont('helvetica');  
+            $obj_pdf->SetFooterMargin(PDF_MARGIN_FOOTER);  
+            $obj_pdf->SetMargins('5', '10', '5');  
+            $obj_pdf->setPrintHeader(false);  
+            $obj_pdf->setPrintFooter(false);  
+            $obj_pdf->SetAutoPageBreak(TRUE, 10);  
+            $obj_pdf->SetFont('Saysettha_OT', '', 9);  
+            $obj_pdf->AddPage(); 
+
+           
+           
+            
+            $content = ''; 
+            $content .=  '
+           
+            
+            <table border="0" cellspacing="0" cellpadding="3" width="100%">  
+           
+            <tr>  
+                 <th align="Left" width="10%" >
+                    <img src="http://localhost/Aiynoy/assets/image/logo_invoice.png" width="40" height="40"/>
+                 </th> 
+                 <th align="Left" width="28%" ><br/><br/><font size="9">ບໍລິສັດ ຈະເລີນເຊກອງ ກຣຸບ ຈຳກັດຜູ້ດຽວ <br/>
+                 ຝ່າຍບັນຊີ-ການເງິນ <br/> 
+                                 
+                                    </font>
+                                   
+                    
+                 </th>
+                 <th align="center" width="25%"><br/><br/><br/><br/><font size="16">ລາຍງານ<br/>ໃບບິນຕິດໜີ້</font><br/>
+  
+                </th>
+                <th align="right" width="35%"><br/><br/><font size="10">ວັນທີພືມ : '.date("d-m-Y H:i:s").' <br/>
+                </font>
+
+                </th>
+                
+                
+                
+                 
+                        
+                    </tr> 
+            </table>'; 
+
+            $content.=' 
+                        
+                        
+                       
+                        <table border="0" cellspacing="0" cellpadding="3"> 
+                       
+                       
+                        </table>   
+                        <table border="0.2" cellspacing="0" cellpadding="5">  
+                            <tr>  
+                                    <th  width="8%" align="center" >ເລກບິນ</th> 
+                                    <th  width="20%" align="Left" >ຊື້ເຈົ້າໜີ້</th> 
+                                    <th  width="20%" align="center" >ວັນທີອອກບິນ</th> 
+                                    <th  width="10%" align="center">ສະຖານະ</th> 
+                                    <th  width="15%" align="center">ຜູ້ໃຊ້</th> 
+                                    <th  width="10%" align="center">ສະກຸນເງີນ</th>  
+                                    <th  width="15%" align="right">ຈຳນວນເງີນ</th>  
+                                
+                            </tr> 
+                       ';
+            $content .= $detell;
+            $content .='
+                            <tr>  
+                                <td  align="center"> '.$i.' ບິນ </td>
+                                <td colspan="4" align="center">ລວມຈຳນວນເງິນທັງຫມົດ </td>  
+                                <td  align="right"></td>  
+                                
+                        
+                            </tr>
+            
+                        </table>';  
+            $content .='
+                        <br/><br/><br/>
+                        <table border="0" cellspacing="0" cellpadding="5"> 
+                                
+                              
+                                <tr>  
+                                    
+                                    <th  height="150px" align="center" >ອຳນວຍການ ຝ່າຍບັນຊີ-ການເງິນ <br/><br/><br/><br/><br/> ຊື່ ................................................ </th>  
+                                    <th  height="150px" align="center" >ຫົວໜ້າພະແນກການເງິນ <br/><br/><br/><br/><br/> ຊື່ ................................................ </th> 
+                                    <th  height="150px" align="center" >ພະນັກງານການເງິນ <br/><br/><br/><br/><br/> ຊື່ ................................................ </th> 
+                                    
+                                </tr> 
+                        </table>    
+            ';
+
+            $obj_pdf->writeHTML($content);  
+            $obj_pdf->Output('file.pdf', 'I');
+            
+        }
+        
+    }
+
 
    
    

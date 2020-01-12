@@ -1,24 +1,27 @@
 <?php 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Vendor_model extends MY_Model{
+class bank_account_model extends MY_Model{
 
     // // public $primary_key = 'sel_id';
     // // public $table = 'tb_sell';
     // var $primary_key = 'sel_id';
-    var $table = "tb_vendor";  
+    var $table = "tb_bank_account";  
     // var $select_column = array("sel_id", "sel_date", "Payment_status", "sel_id");  
-    var $order_column = array("vendor_id", "vendor_name", "vendor_credit","vendor_phone","vendor_address");  
+    var $order_column = array("bank_account_id", "Number_account", "Name_account","bank_id","Status");  
     function make_query()  
     {  
-         $this->db->select('*');  
-         $this->db->from($this->table);  
+         $this->db->select('tb_bank_account.*,tb_bank.bank_Name');  
+         $this->db->from("tb_bank_account");  
+         $this->db->join('tb_bank','tb_bank.bank_id=tb_bank_account.bank_id');
          if(isset($_POST["search"]["value"]))  
          {  
-              $this->db->like("vendor_name", $_POST["search"]["value"]);  
-              $this->db->or_like("vendor_credit", $_POST["search"]["value"]);  
-              $this->db->or_like("vendor_phone", $_POST["search"]["value"]);  
-              $this->db->or_like("vendor_address", $_POST["search"]["value"]); 
+               $this->db->like("bank_account_id", $_POST["search"]["value"]);  
+               $this->db->or_like("Number_account", $_POST["search"]["value"]);  
+               $this->db->or_like("Name_account", $_POST["search"]["value"]);  
+               $this->db->or_like("bank_Name", $_POST["search"]["value"]);  
+            
+              
          }  
          if(isset($_POST["order"]))  
          {  
@@ -26,7 +29,7 @@ class Vendor_model extends MY_Model{
          }  
          else  
          {  
-              $this->db->order_by('vendor_id', 'DESC');  
+              $this->db->order_by('bank_account_id', 'DESC');  
          }  
     }  
     function make_datatables(){  
@@ -53,7 +56,7 @@ class Vendor_model extends MY_Model{
     }  
 
 
-    function addVendor($info)
+    function additem($info)
      {
        $this->db->trans_start();
        //$info['dateInserted'] = date('Y-m-d H:i:s');
@@ -70,14 +73,14 @@ class Vendor_model extends MY_Model{
           return  $myObj;
      }
 
-     function getVendor($id)
+     function getitem($id)
      {
           // $this->load->library('encrypt');
           // $password = $this->encryption->decrypt($_POST["Password"]);
 
           $this->db->select('*');
           $this->db->from($this->table);
-          $this->db->where('vendor_id', $id);
+          $this->db->where('bank_account_id', $id);
           $query = $this->db->get();
           $row = $query->row();
     
@@ -87,9 +90,9 @@ class Vendor_model extends MY_Model{
          return $row;
      }
 
-     function EditVendor($info,$id)
+     function Edititem($info,$id)
      {
-          $this->db->where('vendor_id', $id);
+          $this->db->where('bank_account_id', $id);
           $this->db->update($this->table, $info);
           
           $myObj = array(
@@ -101,8 +104,8 @@ class Vendor_model extends MY_Model{
           return  $myObj;
      }
 
-     function deleteVendor($id){
-          $this->db->where('vendor_id', $id);
+     function deleteitem($id){
+          $this->db->where('bank_account_id', $id);
           $this->db->delete($this->table);
 
           $myObj = array(
@@ -114,14 +117,19 @@ class Vendor_model extends MY_Model{
            
      }
 
+
      function select_item()
      {
+     
 
           $this->db->select('*');
           $this->db->from($this->table);
+          $this->db->join('tb_bank','tb_bank.bank_id=tb_bank_account.bank_id');
           $query = $this->db->get();
           return $query->result(); ;
      }
+
+    
 
      
 

@@ -8,6 +8,7 @@
           
            
                 <a href="<?php echo base_url('Main') ?>"  class="nav-link "><i class="material-icons"></i> ກັບຄືນໜ້າຫຼັກ</a>
+                <!-- <a href="javascript:history.back();"  class="nav-link "><i class="material-icons"></i> ກັບຄືນໜ້າຫຼັກ</a> -->
                
            
         </ul>

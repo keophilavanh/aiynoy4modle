@@ -56,12 +56,19 @@ $route['translate_uri_dashes'] = FALSE;
 $route['Logout'] = 'Login/user_logout';
 
 $route['Accounting'] = 'Accounting';
+$route['Bank-Account'] = 'bank_account';
+$route['Bank-Account-List'] = 'bank_account/list';
+$route['Sub-Account/(:num)']='bank_sub_account/sub_account/$1';
+$route['Sub-Account-List/(:num)']='bank_sub_account/sub_account_list/$1';
+$route['Follow-Account/(:num)']='Follow_account/Follow_account/$1';
 
 $route['Vendor-invoice'] = 'vendor_invoice';
 $route['Create-invoice-Vendor/(:num)'] = 'vendor_invoice/create_by_vendor/$1';
 $route['Print-invoice-Vendor/(:num)'] = 'vendor_invoice/print_invoice/$1';
 $route['Report-Vendor-Invoice'] = 'vendor_invoice/report';
 $route['Print-Report-Vendor-Invoice'] = 'vendor_invoice/print_report';
+$route['Report-Vendor-Invoice-Report-By-Vendor-Id'] = 'vendor_invoice/report_by_vendor';
+$route['Print-Report-By-Vendor-Id'] = 'vendor_invoice/print_report_by_vendor_id';
 
 $route['Code-accounting'] = 'code_accounting';
 $route['Payment-Type'] = 'Payment_Type';

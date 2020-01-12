@@ -160,6 +160,18 @@ class Vendor_invoice_model extends MY_Model{
           return $query->result(); 
      }
 
+     function report_invoice_by_vendor_id($vendor_id)
+     {
+          $this->db->select('*');
+          $this->db->from('tb_invoice_vendor');
+          $this->db->join('tb_vendor','tb_vendor.vendor_id=tb_invoice_vendor.vendor_id');
+          $this->db->where('tb_invoice_vendor.vendor_id', $vendor_id);
+       
+          
+          $query = $this->db->get();  
+          return $query->result(); 
+     }
+
      
 
    
