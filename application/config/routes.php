@@ -62,6 +62,10 @@ $route['Sub-Account/(:num)']='bank_sub_account/sub_account/$1';
 $route['Sub-Account-List/(:num)']='bank_sub_account/sub_account_list/$1';
 $route['Follow-Account/(:num)']='Follow_account/Follow_account/$1';
 
+$route['Plan-Payment-Report'] = 'bank_account/report';
+$route['Print-Plan-Payment-Report'] = 'bank_account/print_report';
+$route['Plan-Payment-Report-By-Sub']='bank_sub_account/report';
+
 $route['Vendor-invoice'] = 'vendor_invoice';
 $route['Create-invoice-Vendor/(:num)'] = 'vendor_invoice/create_by_vendor/$1';
 $route['Print-invoice-Vendor/(:num)'] = 'vendor_invoice/print_invoice/$1';

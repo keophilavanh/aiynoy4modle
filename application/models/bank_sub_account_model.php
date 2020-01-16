@@ -195,6 +195,8 @@ class bank_sub_account_model extends MY_Model{
           return $query->result(); ;
      }
 
+
+
      function update_total($id,$info)
      {
      
@@ -209,6 +211,8 @@ class bank_sub_account_model extends MY_Model{
  
            return  $myObj;
      }
+
+     
 
     
 

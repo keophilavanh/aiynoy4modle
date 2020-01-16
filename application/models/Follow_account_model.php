@@ -84,22 +84,7 @@ class Follow_account_model extends MY_Model{
           return  $myObj ;
      }
 
-    //  function getitem($id)
-    //  {
-    //       // $this->load->library('encrypt');
-    //       // $password = $this->encryption->decrypt($_POST["Password"]);
-
-    //       $this->db->select('*');
-    //       $this->db->from($this->table);
-    //       $this->db->where('bank_sub_account_id', $id);
-    //       $query = $this->db->get();
-    //       $row = $query->row();
-    
-         
-
-        
-    //      return $row;
-    //  }
+    //
 
     //  function Edititem($info,$id)
     //  {
@@ -192,6 +177,118 @@ class Follow_account_model extends MY_Model{
           $query = $this->db->get();
           return $query->result(); ;
      }
+
+     function select_item_list_report($Date_start,$Date_end,$id)
+     {
+     
+
+          $this->db->select('*');
+          $this->db->from($this->table);
+          $this->db->where('bank_sub_account_id', $id);
+          $this->db->where("Date >='".$Date_start."' AND Date <='".$Date_end."'"); 
+          $this->db->order_by('Follow_account_id', 'ASC');  
+          $query = $this->db->get();
+          return $query->result(); ;
+     }
+
+  
+
+
+     function sum_income($Date_start,$Date_end,$id)
+     {
+          $this->db->select('sum(income) as income_total');
+          $this->db->from($this->table);
+          $this->db->where('bank_sub_account_id', $id);
+          $this->db->where("Date >='".$Date_start."' AND Date <='".$Date_end."'");
+
+          $query = $this->db->get();  
+          $row = $query->row();
+          return $row->income_total; 
+          
+     }
+
+     
+     function sum_payment($Date_start,$Date_end,$id)
+     {
+          $this->db->select('sum(payment) as payment_total');
+          $this->db->from($this->table);
+          $this->db->where('bank_sub_account_id', $id);
+          $this->db->where("Date >='".$Date_start."' AND Date <='".$Date_end."'");
+
+          $query = $this->db->get();  
+          $row = $query->row();
+          return $row->payment_total; 
+          
+     }
+
+
+     function Lift_balances($Date_start,$Date_end,$id)
+     {
+          $this->db->select('MIN(`Follow_account_id`) as Follow_account_id ');
+          $this->db->from($this->table);
+          $this->db->where('bank_sub_account_id', $id);
+          $this->db->where("Date >='".$Date_start."' AND Date <='".$Date_end."'");
+
+          $query = $this->db->get();  
+          $row = $query->row();
+
+          if($row->Follow_account_id){
+               return $this->Lift_balances_get($row->Follow_account_id);
+          }else{
+               return 0 ; 
+          }
+
+        
+          
+     }
+
+     function Still_have($Date_start,$Date_end,$id)
+     {
+          $this->db->select('MAX(`Follow_account_id`) as Follow_account_id');
+          $this->db->from($this->table);
+          $this->db->where('bank_sub_account_id', $id);
+
+          $this->db->where("Date >='".$Date_start."' AND Date <='".$Date_end."'");
+
+          $query = $this->db->get();  
+          $row = $query->row();
+
+          if($row->Follow_account_id){
+               return $this->Still_have_get($row->Follow_account_id);
+          }else{
+               return 0 ; 
+          }
+
+         
+          
+          
+     }
+
+     function Still_have_get($id)
+      {
+           
+           $this->db->select('*');
+           $this->db->from($this->table);
+           $this->db->where('Follow_account_id', $id);
+           $query = $this->db->get();  
+           $row = $query->row();
+
+          return $row->Still_have; 
+      }
+
+      function Lift_balances_get($id)
+      {
+           
+           $this->db->select('*');
+           $this->db->from($this->table);
+           $this->db->where('Follow_account_id', $id);
+           $query = $this->db->get();  
+           $row = $query->row();
+
+          return $row->Lift_balances; 
+      }
+
+
 
     
 

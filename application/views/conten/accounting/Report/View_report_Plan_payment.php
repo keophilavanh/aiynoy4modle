@@ -30,31 +30,32 @@
                 <div class="card-body">
                 <br/>
                 <center>
-                <h1>ລາຍງານໃບບິນຕິດໜີ້ ຕາມເຈົ້າໜີ້  </h1>
+                <h1>ລາຍງານແຜນລາຍຈ່າຍ </h1>
                 </center>
                 <br/>
                 <br/>
-                <form name="myForm" id="myForm" action="Print-Report-By-Vendor-Id" target="_blank" method="post" autocomplete="off" onsubmit="return toSubmit();" >
+                <form name="myForm" id="myForm" action="Print-Plan-Payment-Report" target="_blank" method="post" autocomplete="off" onsubmit="return toSubmit();" >
                     <div class="text-center">
                         <center>
                                 <table border="0" cellspacing="0" cellpadding="5"> 
                                     
                                         <tr>  
                                             
-                                            <th align="center" ></th>  
+                                            <th align="center" ><h3>ວັນທີ :</h3></th>  
+                                            <th align="center" > <input type="text" class="form-control form-control-lg" name="date_start" id="date_start" placeholder="Enter DateStart"> </th> 
+                                            <th align="center" ><h3>ຫາ </h3> </th> 
+                                            <th align="center" ><input type="text" class="form-control form-control-lg" name="date_end" id="date_end" placeholder="Enter DateEnd"> </th>
+                                            <th align="center" ><h3>ເລືອກບັນຊີ </h3> </th> 
                                             <th align="center" >
-                                                <h3>ເລືອກເຈົ້າໜີ້ :</h3><br/>
-                                                <select class="form-control form-control-lg selected2 " name="vendor_id" id="vendor_id" > 
-                                                    
-                                                            <?php   
-                                                                foreach($vendor as $row)  
+                                                <select class="form-control form-control-lg   "  name="bank_account_id" id="bank_account_id"> 
+                                                            
+                                                            <?php   foreach($bank_account as $row)  
                                                                 {  
-                                                                echo '<option value="'.$row->vendor_id.'"> '.$row->vendor_name.'</option>';
+                                                                echo '<option value="'.$row->bank_account_id.'"> '.$row->Name_account.'</option>';
                                                                 } 
                                                             ?>
                                                 </select>
-                                             </th> 
-                                           
+                                             </th>
                                             
                                         </tr> 
                                     
@@ -98,23 +99,22 @@
 <script>
 
         function toSubmit(){            
-            // if($('#date_start').val() == '')  
-            // {  
+            if($('#date_start').val() == '')  
+            {  
 
-            //     $('#myAlert').show('fade');
+                $('#myAlert').show('fade');
                
-            //     return false;
-            // }  
-            // else if($('#date_end').val() == '')
-            // {  
-            //     $('#myAlert').show('fade');
+                return false;
+            }  
+            else if($('#date_end').val() == '')
+            {  
+                $('#myAlert').show('fade');
                 
-            //     return false;
-            // }else{
+                return false;
+            }else{
                
-            // }
+            }
         }
-        $(".selected2").select2();
 
         $(document).ready(function () {
 
@@ -122,8 +122,8 @@
                 window.location.replace('../../../main.php');
             });
 
-            $("#date_start").datetimepicker({format:'d-m-Y H:m:s'});
-            $("#date_end").datetimepicker({format:'d-m-Y H:m:s'});
+            $("#date_start").datetimepicker({format:'d-m-Y '});
+            $("#date_end").datetimepicker({format:'d-m-Y '});
             
            
 

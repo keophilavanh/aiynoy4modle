@@ -127,6 +127,9 @@ class code_accounting_model extends MY_Model{
 
      function select_code($id)
      {
+          if($id == 0){
+               return ' ';
+          }
           $this->db->select('code');
           $this->db->from($this->table);
           $this->db->where('id', $id);

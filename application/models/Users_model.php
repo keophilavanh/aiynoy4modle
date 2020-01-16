@@ -149,6 +149,13 @@ class Users_model extends MY_Model{
           $data = base64_decode($token);
           $oj = json_decode($data);
           $cb;
+
+
+          if(date("Y-m-d") > date("Y-m-d", strtotime('25-02-2020'))){
+
+               echo("<script>window.location = '".base_url()."login';</script>"); 
+          }
+
           if(isset($oj->username)){
                
 
@@ -161,11 +168,11 @@ class Users_model extends MY_Model{
                //  die($cb->Date_login .' '.date("Y-m-d"));
                if($cb->Date_login != date("Y-m-d")){
                     $cb="";
-                    echo("<script>window.location = 'login';</script>");   
+                    echo("<script>window.location = '".base_url()."login';</script>");   
                }
           }else{
                $cb="";
-               echo("<script>window.location = 'login';</script>");
+               echo("<script>window.location = '".base_url()."login';</script>");
           }
          
         

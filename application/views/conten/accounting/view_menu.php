@@ -71,6 +71,8 @@
                     <li><a href="<?php echo base_url('Report-Vendor-Invoice') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໃບບິນຕິດໜີ້</a></li>
                     <li><a href="<?php echo base_url('Report-Vendor-Invoice-Report-By-Vendor-Id') ?>"><i class="fas fa-file-alt"></i> ລາຍງານໜີ້ສິນ ຕາມເຈົ້າໜີ້</a></li>
                     <li><a href="<?php echo base_url('Report-Voucher') ?>"><i class="fas fa-file-alt"></i> ລາຍງານບັດຜ່ານບັນຊີ</a></li>
+                    <li><a href="<?php echo base_url('Plan-Payment-Report') ?>"><i class="fas fa-file-alt"></i> ລາຍງານແຜນລາຍຈ່າຍ</a></li>
+                    <li><a href="<?php echo base_url('Plan-Payment-Report-By-Sub') ?>"><i class="fas fa-file-alt"></i> ລາຍງານແຜນລາຍຈ່າຍ ຕາມບ້ວງບັນຊີ</a></li>
 
                 </ul>
             </li>

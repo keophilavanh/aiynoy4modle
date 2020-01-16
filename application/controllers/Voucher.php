@@ -359,10 +359,12 @@ class Voucher extends CI_Controller{
   
                 </th>
                 <th  width="30%"><font size="10">ບັດຜ່ານບັນຊີ / V No : '.$ticket_data->ticket_no.' <br/>
-                ລົງວັນທີ : '.date('d-m-Y', strtotime($ticket_data->Date)).'</font>
+                ລົງວັນທີ : '.date('d-m-Y', strtotime($ticket_data->Date)).'<br/>'.$ticket_data->template.'</font>
 
                 <br/><br/><font size="10">ເອກະສານຢັ້ງຢືນ / Ref Doc : '.$ref->Ticket_No.' <br/>
-                ລົງວັນທີ : '.date('d-m-Y', strtotime($ref->Date)).'</font>
+                ລົງວັນທີ : '.date('d-m-Y', strtotime($ref->Date)).'
+                
+                </font>
 
                 </th>
                 
