@@ -118,7 +118,7 @@
                                 <?php 
                                     foreach($money_go as $row)  
                                     {  
-                                    echo '<option value="'.$row->money_go_id.'"> '.$row->Name.'</option>';
+                                    echo '<option value="'.$row->money_go_id.'">'.$row->Name.'</option>';
                                     } 
                                 ?> 
                             </select>
@@ -135,7 +135,7 @@
                                 <?php 
                                     foreach($rate as $row)  
                                     {  
-                                    echo '<option value="'.$row->Rate.'"> '.$row->Rate_Name.'</option>';
+                                    echo '<option value="'.$row->Rate.'">'.$row->Rate_Name.'</option>';
                                     } 
                                 ?> 
                                 </select>

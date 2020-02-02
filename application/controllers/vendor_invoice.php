@@ -353,7 +353,7 @@ class vendor_invoice extends CI_Controller{
                         
                         <table border="0.2" cellspacing="0" cellpadding="3">  
                             <tr>  
-                                    <th  width="10%"   align="center">ລຳດັບ</th> 
+                                    <th  width="10%" align="center">ລຳດັບ</th> 
                                     <th  width="45%" align="Left" >ລາຍການ</th> 
                                     <th  width="10%" align="center">ອ.ລ.ປ</th>  
                                     <th  width="15%" align="right">ຈຳນວນເງີນ</th>  

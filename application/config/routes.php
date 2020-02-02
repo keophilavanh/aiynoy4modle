@@ -66,6 +66,8 @@ $route['Plan-Payment-Report'] = 'bank_account/report';
 $route['Print-Plan-Payment-Report'] = 'bank_account/print_report';
 $route['Plan-Payment-Report-By-Sub']='bank_sub_account/report';
 
+
+
 $route['Vendor-invoice'] = 'vendor_invoice';
 $route['Create-invoice-Vendor/(:num)'] = 'vendor_invoice/create_by_vendor/$1';
 $route['Print-invoice-Vendor/(:num)'] = 'vendor_invoice/print_invoice/$1';
@@ -103,6 +105,10 @@ $route['Create-Voucher'] = 'Voucher/create_by_Voucher';
 $route['Print-Voucher/(:num)'] = 'Voucher/print_invoice/$1';
 $route['Report-Voucher'] = 'Voucher/report';
 $route['Print-Report-Voucher'] = 'Voucher/print_report';
+
+
+$route['Project-Manage']='project_manage/manager';
+$route['Create-Project']='project_manage/create';
 
 
 // $route['api/userlist'] = 'User/add';

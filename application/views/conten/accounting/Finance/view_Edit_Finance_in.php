@@ -138,7 +138,12 @@
                                 <?php 
                                     foreach($rate as $row)  
                                     {  
-                                    echo '<option value="'.$row->Rate.'"> '.$row->Rate_Name.'</option>';
+                                        if($row->Rate_Name == $ticket_data->Rate){
+                                            echo '<option value="'.$row->Rate.'" selected>'.$row->Rate_Name.'</option>';
+                                        }else{
+                                            echo '<option value="'.$row->Rate.'" >'.$row->Rate_Name.'</option>';
+                                        }
+                                   
                                     } 
                                 ?> 
                                 </select>
@@ -225,7 +230,8 @@
 
       
         $('#type_money').val(<?php echo $ticket_data->type_money; ?>); 
-        $( "#rate option:selected" ).text('<?php echo $ticket_data->Rate; ?>');
+        // $( "#rate option:selected" ).text('<?php //echo $ticket_data->Rate; ?>');
+       
         sumtotal();
        
         $("#date").datetimepicker({format:'d-m-Y H:m:s'});

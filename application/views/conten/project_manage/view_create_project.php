@@ -19,145 +19,137 @@
 <div class="d-flex">
     
     <?php
-         $this->load->view('conten/accounting/view_menu');
+         $this->load->view('conten/project_manage/view_menu');
     ?>
 
     <div class="content p-4">
-        <h2 class="mb-4">ແກ້ໄຂໃບອະຍຸມັດລາຍຈ່າຍ</h2>
+        <h2 class="mb-4">ສ້າງໂຄງການໃໝ່</h2>
 
         <div class=" card mb-4">
             <div class="card-body row">
-                    <div class="col-sm-4" >   
-
-                        <h5>- ອີງຕາມ : </h5>
-                        <textarea class="form-control"  rows="1" name="titel" id="titel"> <?php echo $ticket_data->tital;?></textarea>
-                        <h5>- ຫົວຂໍ້ : </h5>
-                        <textarea class="form-control"  rows="2" name="header" id="header"> <?php echo $ticket_data->header;?></textarea><br/>
-
-                    </div>
-                    <div class="col-sm-4" align="center" >  
+                  
+                    <!-- <div class="col-sm-12" align="center" >  
                         <br/>
-                        <h2> ໃບອະຍຸມັດລາຍຈ່າຍ </h2>
-                    </div>
-                    <div class="col-sm-2" align="right" > </div>
-                    <div class="col-sm-2"  >   
-                        <br/>
-                        <br/>
-                        <h5> ວັນທີ : <?php echo date('d-m-Y')?> </h5>
-                        <h5 id="show_vendor"> ລະຫັດໜີ້ :  ວ່າງ</h5>
-                        <button type="button" class="btn btn-success btn-lg" title="Select" name="Select" id="Select_vendor_invoice" >ເລືອກໃບໜີ້</button>
-                        <button type="button" class="btn btn-danger btn-lg" title="Select" name="Select" id="Remove_vendor_invoice" >ຍົກເລີກ</button>
-                        <input type="hidden" class="form-control" name="invoice_vendor" id="invoice_vendor" autocomplete="off" value="0" >
-                        <!-- <input type="text" class="form-control" name="date" id="date" autocomplete="off" > -->
-                       
-                    </div>
+                        <h1> ສ້າງໂຄງການໃໝ່ </h1>
+                    </div> -->
+                  
 
-                    <div class="col-sm-5" >   
+                    <div class="col-sm-8" >   
                         
+                         <h5>ຊື່ໂຄງການ : </h5>
+                        <textarea class="form-control"  rows="2" name="titel" id="titel"></textarea>
+                        <h5>ລາຍລະອຽດ : </h5>
+                        <textarea class="form-control"  rows="3" name="header" id="header"></textarea><br/>
                         
                       
                     </div>
-                    <div class="col-sm-3" align="center" >  
-                        <br/>
-                        
-                    </div>
-                    <div class="col-sm-2" align="right" > </div>
-                    <div class="col-sm-2" align="right" >   
+                  
+                  
+                    <div class="col-sm-2"  >   
+
+                        <h5>ວັນທີເລີ້ນ : </h5>
+                        <input type="text" name="date_start" id="date_start"  class="form-control" />
+                        <h5>ວັນທີສິ້ນສຸດ : </h5>
+                        <input type="text" name="date_end" id="date_end"  class="form-control" />
+                        <h5>ມູນຄ່າໂຄງການ : </h5>
+                        <input type="number" name="total" id="total"  class="form-control" />
                    
                     
                       
                         
                     </div>
-                    <div class="col-sm-12"  >
-                        <table class="table table-bordered" id="Data_table"  cellspacing="0" width="100%">
-                            <thead>
-                            <tr>
-                                <th  width="5%" scope="col"><h4>ລຳດັບ</h4></th>
-                                <th  width="45%" scope="col"><h4>ເນື້ອໃນລາຍການ</h4></th>
-                                
-                                <th  width="15%" scope="col" class="text-center"><h4>ຈຳນວນ</h4></th>
-                                <th  width="10%" scope="col" class="text-center"><h4>ຫົວໜ່ວຍ</h4></th>
-                                <th  width="15%" scope="col" class="text-right"><h4>ລາຄາຕໍ່ໜ່ວຍ</h4></th>
-                                <th  width="15%" scope="col" class="text-right"><h4>ຈຳນວນເງີນ</h4></th>
-                                <th  width="10%" scope="col">
-                                    <button type="button" class="btn btn-success" title="ເພີ້ມ" name="add" id="add" >+</button>
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-
-                                    <?php
-                                        $i=0;
-                                        foreach($fetch_data as $row)  
-                                        {  
-                                     
-                                        echo "<tr id='row".++$i."'>
-                                                    <td align='center'  contenteditable='false' >".$i."</td>
-                                                    <td align='left' contenteditable class='item_name'>".$row->Name."</td>
-                                                    <td align='center' contenteditable class='item_qty'>".$row->Qty."</td>
-                                                    <td align='center' contenteditable class='item_unit'>".$row->Unit."</td>
-                                                    <td align='right' contenteditable class='item_price' >".$row->Price."</td>
-                                                    <td align='right' contenteditable='false' >".$row->Qty*$row->Price."</td>
-                                                    <td> <button type='button' name='remove' data-row='".$i."' class='btn btn-icon btn-pill btn-danger remove'><i class='fa fa-fw fa-trash'></i></button></td>
-                                                </tr>
-                                        ";
-
-                                      
-                                        } 
-                                    
-                                    ?>
-
-                               
-                        
-                
-                            </tbody>
-                            
-                            
-                            
-                            
-                                    
-                        
-                        </table>
+                    <div class="col-sm-2" > 
+                        <h5>ເວລາທັງໝົດຂອງໂຄງການ : </h5>
+                        <h6>3 ປີ 4 ເດືອນ 1 ອາທິດ 2 ມື້</h6>
                     </div>
-                        <div class="col-sm-4"  >
-                            <h5>ຈຳນວນເງິນລວມເປັນຕົວຫນັງສື : </h5>
-                            <textarea class="form-control"  rows="2" name="text_money" id="text_money"> <?php echo $ticket_data->text_money;?> </textarea><br/>
-                            <select class="form-control form-control-lg" name="type_money" id="type_money" >
-                                <?php 
-                                    foreach($money_go as $row)  
-                                    {  
-                                    echo '<option value="'.$row->money_go_id.'"> '.$row->Name.'</option>';
-                                    } 
-                                ?> 
-                            </select>
-                        
-                        </div>
-                        <div class="col-sm-5"  ></div>
 
-                        <div class="col-sm-3" align="right"  >
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">ສະກຸນເງີນຕາ</span>
+                    <div class="col-sm-12" > 
+                            <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">ໜ້າວຽກ  <a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">ສັບພະຍາກອນ <a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">ປະເມີນໂຄງການ</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="chart-tab" data-toggle="tab" href="#chart" role="tab" aria-controls="chart" aria-selected="false">Chart</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+                                    <div class="row">
+                                        <div class="col-sm-12" > 
+                                            <table class="table table-bordered" id="Data_table"  cellspacing="0" width="100%">
+                                                <thead>
+                                                <tr>
+                                                    <th  width="5%" scope="col"><h4>ລຳດັບ</h4></th>
+                                                    <th  width="45%" scope="col"><h4>ເນື້ອໃນລາຍການ</h4></th>
+                                                    <th  width="15%" scope="col" class="text-right"><h4>ວັນທີເລີນ</h4></th>
+                                                    <th  width="15%" scope="col" class="text-right"><h4>ວັນສຳເລັດ</h4></th>
+                                                    <th  width="10%" scope="col">
+                                                        <button type="button" class="btn btn-success" title="ເພີ້ມ" name="add" id="add" >+</button>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                
+                                            
+                                    
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr id='row0'>
+                                                        <td class="text-left" > </td>
+                                                        <td class="text-left" ></td>
+                                                        <td class="text-center" ></td>
+                                                        <td class="text-right" ></td>
+                                                        <td class="text-right" ></td>
+                                                       
+                                                        
+                                                    </tr>
+                                                </tfoot>
+                                        
+                                        
+                                        
+                                                
+                                    
+                                            </table>
+                                        </div>
+
+                                        
+                                    </div>
+
+                                   
+                                
                                 </div>
-                                <select class="form-control form-control-lg"  name="rate" id="rate">
-                                <?php 
-                                    foreach($rate as $row)  
-                                    {  
-                                        if($row->Rate_Name == $ticket_data->Rate){
-                                            echo '<option value="'.$row->Rate.'" selected>'.$row->Rate_Name.'</option>';
-                                        }else{
-                                            echo '<option value="'.$row->Rate.'" >'.$row->Rate_Name.'</option>';
-                                        }
-                                    } 
-                                ?> 
-                                </select>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                    <h5>profile </h5>
+                                </div>
+                                <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                    <h5>contact </h5>
+                                </div>
+
+                                <div class="tab-pane fade" id="chart" role="tabpanel" aria-labelledby="chart-tab">
+                                    <h5>chart </h5>
+                                </div>
                             </div>
-                            <div>
-                                <h4 id="total_ticket"> ລວມເງີນ : 0 ກີບ  </h4><br/>
-                                <h4 id="total_ticket_kip">  </h4><br/>
-                            </div>
-                            <button type="button" class="btn btn-primary btn-lg "  title="ບັນທືກ" name="save" id="save" >ແກ້ໄຂ</button>
-                        </div>
+                    </div>
+
+                           
+                   
+                    <div class="col-sm-12"  >
+                        
+                        <br/>
+                        <br/>
+                        <br/>
+                    </div>
+                        
+
+                       
                        
                 
             </div>
@@ -210,6 +202,9 @@
 
 <script type="text/javascript" language="javascript" >  
  $(document).ready(function(){  
+
+            $("#date_start").datetimepicker({format:'d-m-Y '});
+            $("#date_end").datetimepicker({format:'d-m-Y '});
      
         function sumtotal(){
             var table = document.getElementById("Data_table");
@@ -266,22 +261,6 @@
         console.log(new Intl.NumberFormat('ja-JP').format(parseInt(number)));
         return new Intl.NumberFormat('ja-JP').format(number);
     }
-
-
-        $('#type_money').val(<?php echo $ticket_data->type_money; ?>); 
-        $( "#rate option:selected" ).text('<?php echo $ticket_data->Rate; ?>');
-        sumtotal();
-
-        $('#invoice_vendor').val(<?php echo $ticket_data->invoice_vendor_id; ?>); 
-        
-                   
-
-        if($('#invoice_vendor').val() > 0){
-            var vendor_invoice_id = $('#invoice_vendor').val();
-            document.getElementById("show_vendor").innerHTML= 'ລະຫັດໜີ້ : '+vendor_invoice_id;
-        }else{
-            document.getElementById("show_vendor").innerHTML= 'ລະຫັດໜີ້ :  ວ່າງ';
-        }
 
         $("#date").datetimepicker({format:'d-m-Y H:m:s'});
 
@@ -461,7 +440,7 @@
                         })
                         .then((willDelete) => {
                         if (willDelete) {
-                                var invoid_id = '<?php echo $ticket_data->finance_out_id;?>';
+
                                 var titel =  $('#titel').val(); 
                                 var header =  $('#header').val(); 
                                 var date =  $('#date').val();
@@ -501,7 +480,7 @@
 
 
                             $.ajax({  
-                                    url:"<?php echo base_url() . 'Finance_out/edit_Finance_out'; ?>", 
+                                    url:"<?php echo base_url() . 'Finance_out/insert_invoice'; ?>", 
                                     method:"POST",  
                                     data:{
                                             titel:titel,
@@ -516,8 +495,7 @@
                                             item_qty:item_qty,
                                             item_unit:item_unit,
                                             item_price:item_price,
-                                            rate_name:rate_name,
-                                            invoid_id:invoid_id
+                                            rate_name:rate_name
                                         },  
                                     dataType:"json",  
                                     success:function(data){  
@@ -532,14 +510,9 @@
                                                 icon: "success",
                                                 });
 
-                                                // window.setTimeout(
-                                                // function(){window.open("<?php// echo base_url() . 'Print-invoice-Finance-Out/'; ?>"+data.ticket , '_blank')
-                                                //         window.location.replace('Finance-Out')
-                                                //     }, 800);
-
                                                 window.setTimeout(
-                                                function(){
-                                                        window.location.replace('../Finance-Out')
+                                                function(){window.open("<?php echo base_url() . 'Print-invoice-Finance-Out/'; ?>"+data.ticket , '_blank')
+                                                        window.location.replace('Finance-Out')
                                                     }, 800);
                                             
                                             

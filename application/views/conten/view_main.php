@@ -50,7 +50,7 @@
                     </div>
                 
                     <div class="col-md-4 ">
-                    <span class="fa-stack fa-5x mb-2 Purchase click">
+                    <span class="fa-stack fa-5x mb-2 project_manage click">
                         <i class="fas fa-circle fa-stack-2x text-primary"></i>
                         <i class="fas fa-clipboard-list fa-stack-1x fa-inverse"></i> 
                         
@@ -162,6 +162,13 @@
               
                    
              });
+
+             $(document).on('click', '.project_manage', function(){  
+                 
+                 window.location.replace('project_manage');
+               
+                    
+              });
             //  $(document).on('click', '.Purchase', function(){  
                  
             //      window.location.replace('modules/Purchase/Service/service.php');

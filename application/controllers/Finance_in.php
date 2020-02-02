@@ -227,6 +227,7 @@ class Finance_in extends CI_Controller{
 
                     'status' => 'New',
                     'Rate' => $rate_name,
+                    'rate_number' => $rate,
                     
                     'ticket_total' => $ticket_total,
                     'username' => $this->Users_model->get_username_token(),
@@ -303,7 +304,7 @@ class Finance_in extends CI_Controller{
 
                     'status' => 'New',
                     'Rate' => $rate_name,
-                    
+                    'rate_number' => $rate,
                     'ticket_total' => $ticket_total,
                     'username' => $this->Users_model->get_username_token(),
                     );
@@ -373,6 +374,7 @@ class Finance_in extends CI_Controller{
                         <td  align="center">'.$row->Unit.'</td>
                         <td  align="right">'.number_format($row->Price,0).'</td>  
                         <td  align="right">'.number_format($row->Qty*$row->Price,0).'</td>  
+                        <td  align="right">'.number_format(($row->Qty*$row->Price)*$ticket_data->rate_number,0).'</td>
                 
                     </tr>
                 ';
@@ -425,7 +427,10 @@ class Finance_in extends CI_Controller{
                  <th align="center" width="20%"><br/><br/><br/><br/><font size="13">ໃບອະນຸມັດລາຍຮັບ</font><br/><br/>
   
                 </th>
-                <th align="right" width="40%"><br/><br/><font size="10">ເລກທີ່ : '.$ticket_data->Ticket_No.' <br/>
+                <th align="center" width="10%">
+  
+                </th>
+                <th  width="30%"><br/><br/><font size="10">ເລກທີ່ : '.$ticket_data->Ticket_No.' <br/>
                 ວັນທີ : '.date('d-m-Y', strtotime($ticket_data->Date)).'</font>
 
                 </th>
@@ -442,22 +447,23 @@ class Finance_in extends CI_Controller{
                         <font size="11"> &nbsp; '.$ticket_data->header.'</font><br/><br/>
                         
                        
-                        <table border="0" cellspacing="0" cellpadding="3"> 
+                        <table border="0" cellspacing="0" cellpadding="5"> 
                         <tr>  
                             
-                            <th  ><font size="11">ຊື່ງມີລາຍລະອຽດດັ່ງລຸ່ມນ</font><br/> </th>  
-                            <th align="right" > ສະກຸນເງິນ: '.$ticket_data->Rate.',ວິທີຈ່າຍ: '.$ticket_data->Name.' </th>
+                            <th  ><font size="11">ຊື່ງມີລາຍລະອຽດດັ່ງລຸ່ມນ</font><br/>ວິທີຈ່າຍ: '.$ticket_data->Name.' </th>  
+                            <th align="right" > ສະກຸນເງິນ: '.$ticket_data->Rate.'<br/> ອັດຕາແລກປ່ຽນ: '.$ticket_data->rate_number.'   </th>
                         </tr>  
                        
                         </table>   
                         <table border="0.2" cellspacing="0" cellpadding="5">  
                             <tr>  
                                     <th  width="10%" align="center" >ລຳດັບ</th> 
-                                    <th  width="35%" align="Left" >ລາຍການ</th> 
+                                    <th  width="25%" align="Left" >ລາຍການ</th> 
                                     <th  width="10%" align="center">ຈຳນວນ</th> 
                                     <th  width="10%" align="center">ຫົວໜ່ວຍ</th> 
-                                    <th  width="15%" align="right">ຄາລາ</th>  
-                                    <th  width="20%" align="right">ຈຳນວນເງີນ</th>  
+                                    <th  width="15%" align="right">ລາຄາ</th>  
+                                    <th  width="15%" align="right">ຈຳນວນເງີນ</th>
+                                    <th  width="15%" align="right">ຈຳນວນເງີນກີບ</th>  
                                 
                             </tr> 
                        ';
@@ -467,6 +473,7 @@ class Finance_in extends CI_Controller{
                                  
                                 <td colspan="5" align="center">ລວມຈຳນວນເງິນທັງຫມົດ </td>  
                                 <td  align="right">'.number_format($total_ticket,0).' </td>  
+                                <td  align="right">'.number_format($total_ticket*$ticket_data->rate_number,0).' </td>
                                 
                         
                             </tr>
