@@ -149,6 +149,7 @@
                                 </select>
                             </div>
                             <div>
+                                <h4 id="rate_show"> ອັດຕາແລກປຽນ : </h4><br/>
                                 <h4 id="total_ticket"> ລວມເງີນ : 0 ກີບ  </h4><br/>
                                 <h4 id="total_ticket_kip">  </h4><br/>
                             </div>
@@ -170,6 +171,7 @@
 </html>
 
 <script type="text/javascript" language="javascript" >  
+document.getElementById("rate_show").innerHTML= 'ອັດຕາແລກປຽນ : '+document.getElementById("rate").value;
  $(document).ready(function(){  
      
         function sumtotal(){
@@ -216,6 +218,7 @@
                 //alert(name_type_rate);
 
             document.getElementById("total_ticket").innerHTML= 'ລວມເງີນ : '+conver_number_to_string(total_price)+' '+rate_name;
+            document.getElementById("rate_show").innerHTML= 'ອັດຕາແລກປຽນ : '+document.getElementById("rate").value;
            // document.getElementById("total_ticket_kip").innerHTML= 'ລວມເງີນກີບ : '+conver_number_to_string(total_price_kip)+' ກີບ';
            $('#text_money').val(text_number_to_string(total_price)+rate_name);
 
