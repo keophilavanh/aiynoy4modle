@@ -97,6 +97,25 @@ class Vendor_invoice_model extends MY_Model{
           return  $insert_id;
      }
 
+     function move_item($id,$new_ticket_id)
+     {
+          $info = array(
+               'invoice_id' => $new_ticket_id,
+               );
+
+          $this->db->where('id', $id);
+          $this->db->update('tb_invoice_vendor_detell', $info);
+          
+          $myObj = array(
+               'status' => 'ok',
+               'msg' =>  'Update ຂໍ້ມູນສຳເລັດ...',
+               'data' =>  $info,
+               'id' =>  $id
+               );
+
+          return  $myObj;
+     }
+
      function select_item_by_invoice($id)
      {
           $this->db->select('*');
@@ -115,6 +134,30 @@ class Vendor_invoice_model extends MY_Model{
           $this->db->where('invoice_id', $id);
           $query = $this->db->get();
           return $query->row();
+     }
+
+     function move_invoice_amount($id,$money)
+     {
+          $this->db->select('amount,ticket_total');
+          $this->db->from('tb_invoice_vendor');
+          $this->db->where('invoice_id', $id);
+          $query = $this->db->get();
+          $row = $query->row();
+
+          
+
+          $info = array(
+                    
+                    'amount' => $row->amount - $money, 
+                    'ticket_total' => $row->ticket_total - $money, 
+                    );
+
+
+
+          $this->db->where('invoice_id', $id);
+          $this->db->update('tb_invoice_vendor', $info);
+
+          return 0 ;
      }
 
      function pay_invoice_vendor($id,$money)
@@ -172,6 +215,9 @@ class Vendor_invoice_model extends MY_Model{
           return $query->result(); 
      }
 
+
+
+     
      
 
    

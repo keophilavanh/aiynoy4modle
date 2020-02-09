@@ -70,6 +70,7 @@ $route['Plan-Payment-Report-By-Sub']='bank_sub_account/report';
 
 $route['Vendor-invoice'] = 'vendor_invoice';
 $route['Create-invoice-Vendor/(:num)'] = 'vendor_invoice/create_by_vendor/$1';
+$route['Move-invoice-Vendor/(:num)'] = 'vendor_invoice/move_ticket/$1';
 $route['Print-invoice-Vendor/(:num)'] = 'vendor_invoice/print_invoice/$1';
 $route['Report-Vendor-Invoice'] = 'vendor_invoice/report';
 $route['Print-Report-Vendor-Invoice'] = 'vendor_invoice/print_report';

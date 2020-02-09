@@ -23,7 +23,7 @@
     ?>
 
     <div class="content p-4">
-        <h2 class="mb-4">ສ້າງໃບບິນຕິດໜີ້</h2>
+        <h2 class="mb-4">ແຍກໃບບິນຕິດໜີ້</h2>
 
         <div class=" card mb-4">
             <div class="card-body row">
@@ -55,29 +55,39 @@
                                 <th  width="15%" scope="col" class="text-right"><h4>ຈຳນວນເງີນ</h4></th>
                                 <th  width="15%" scope="col" class="text-right"><h4>ຈຳນວນເງີນກີບ</h4></th>
                                 <th  width="10%" scope="col">
-                                    <button type="button" class="btn btn-success" title="ເພີ້ມ" name="add" id="add" >+</button>
+                                    <h4>ເລືອກ</h4>
                                 </th>
                             </tr>
                             </thead>
                             <tbody>
 
+                                    <?php
+                                        $i=0;
+                                        foreach($fetch_data as $row)  
+                                        {  
+                                     
+                                       
+
+                                        echo '   <tr>  
+                                                    <td  align="center">'.++$i.'</td> 
+                                                    <td  align="Left"  >'.$row->Name.'</td> 
+                                                    <td  align="center">'.$row->rate.'</td>  
+                                                    <td  align="right">'.$row->Price.' </td>  
+                                                    <td  align="right">'.$row->rate*$row->Price.' </td>
+                                                    <td  align="center"><input type="checkbox" class="form-check-input" Name="Check" id="exampleCheck'.++$i.'" value="'.$row->id.'"> </td>  
+                                            
+                                                </tr>';
+
+                                      
+                                        } 
+                                    
+                                    ?>
+
                                
                         
                 
                             </tbody>
-                            <tfoot>
-                                <tr id='row0'>
-                                    <td class="text-left" > </td>
-                                    <td class="text-left" ></td>
-                                    <td class="text-center" ></td>
-                                    <td class="text-right" ></td>
-                                    <td class="text-right" ></td>
-                                    <td class="text-left" >
-                                   
-                                    </td>
-                                    
-                                </tr>
-                            </tfoot>
+                           
                             
                             
                             
@@ -97,7 +107,9 @@
                                 <?php 
                                     foreach($rate as $row)  
                                     {  
-                                    echo '<option value="'.$row->Rate.'">'.$row->Rate_Name.'</option>';
+                                        if($row->Rate_Name == $vender_data->rate_name){
+                                            echo '<option value="'.$row->Rate.'" selected >'.$row->Rate_Name.'</option>';
+                                        }
                                     } 
                                 ?> 
                                 </select>
@@ -106,7 +118,7 @@
                                 <h4 id="total_ticket"> ລວມເງີນກີບ : 0 ກີບ  </h4><br/>
                                 <h4 id="total_ticket_kip">  </h4><br/>
                             </div>
-                            <button type="button" class="btn btn-primary btn-lg " data-vendor="<?php echo $vender_data->vendor_id;?>" title="ບັນທືກ" name="save" id="save" >ບັນທືກ</button>
+                            <button type="button" class="btn btn-primary btn-lg " data-vendor="<?php echo $vender_data->invoice_id;?>" title="ບັນທືກ" name="save" id="save" >ບັນທືກ</button>
                         </div>
                        
                 
@@ -174,6 +186,8 @@
 
             return total_price;
         }
+
+        sumtotal();
 
         function conver_number_to_string(number) {
         
@@ -249,15 +263,37 @@
 
            
            $(document).on('click', '#save', function(){  
-                var vendor_id = this.getAttribute("data-vendor"); 
-                var x  = document.getElementById("Data_table").rows[1].cells.item(0).innerHTML;
+                var invoice_id = this.getAttribute("data-vendor"); 
+                var x  = document.getElementById("Data_table").rows[1].cells.item(0).innerHTML; 
+                var checkboxes = document.getElementsByName("Check");
+                var checked_total = 0;
+                var unchecked_total = 0;
+                var move_id = [];
+                var total_price_check = parseInt(0, 10);
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        console.log('checked');
+                        console.log(checkboxes[i].value);
+                        checked_total++;
+                        move_id.push(checkboxes[i].value);
+                        total_price_check += parseInt(document.getElementById("Data_table").rows[i+1].cells.item(3).innerHTML, 10);
+                    }else{
+                        unchecked_total++;
+                    }
+                }
+                console.log("move_id");
+                console.log(move_id);
+                console.log("total_price_check");
+                console.log(total_price_check);
+            
                 
-                
-                if(x != 1 ){
+               //return;
+
+                if(checked_total == 0 || unchecked_total == 0 ){
 
                     swal({
-                            title: "ບໍ່ມີລາຍການ",
-                            text:   'ບໍ່ມີຂໍ້ມູນ',
+                            title: "ທ່ານຕ້ອງເລືອກລາຍການ ແລະ ຕ້ອງມີລາຍການຄົງຄາງ",
+                            text:   '! ແຈ້ງເຕືອນ',
                             icon: "warning",
                         });  
 
@@ -265,7 +301,7 @@
                 else{
 
                     swal({
-                        title: "ຢືນຢັງການບັນທືກຂໍ້ມູນ",
+                        title: "ຢືນຢັງການແຍກໃບບິນ",
                         text: "ກະນຸນາຢືນຢັງ",
                         icon: "warning",
                         buttons: true,
@@ -274,28 +310,14 @@
                         .then((willDelete) => {
                         if (willDelete) {
 
-                                var rate =  $('#rate').val(); 
-                                var rate_name = new String($( "#rate option:selected" ).text());
-                                var ticket_total = sumtotal();
-                                var item_name = [];
-                                var item_price = [];
-                              
-                              
-                                var ticket = 0
-
-                                $('.item_name').each(function(){
-                                item_name.push($(this).text());
-                                });
-                                $('.item_price').each(function(){
-                                item_price.push($(this).text());
-                                });
+                               
 
 
 
                             $.ajax({  
-                                    url:"<?php echo base_url() . 'vendor_invoice/insert_invoice'; ?>", 
+                                    url:"<?php echo base_url() . 'vendor_invoice/move_invoice'; ?>", 
                                     method:"POST",  
-                                    data:{vendor_id:vendor_id,rate:rate,ticket_total:ticket_total,item_name:item_name,item_price:item_price,rate_name:rate_name},  
+                                    data:{move_id:move_id,total_price_check:total_price_check,invoice_id:invoice_id},  
                                     dataType:"json",  
                                     success:function(data){  
                                       

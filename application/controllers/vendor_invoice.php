@@ -49,7 +49,9 @@ class vendor_invoice extends CI_Controller{
              $sub_array[] = $row->amount;
              $sub_array[] = $row->ticket_total;  
              $sub_array[] = $row->username;  
-             $sub_array[] = '<a href="'.base_url('Print-invoice-Vendor/').$row->invoice_id.'" target="_blank" class="btn btn-pill btn-primary edit_data"  title="Printer"><i class="fas fa-file-alt"></i></a> 
+             $sub_array[] = '
+                                <a href="'.base_url('Move-invoice-Vendor/').$row->invoice_id.'"  class="btn btn-pill btn-primary move"  title="move">ແຍກບິນ</a>
+                                <a href="'.base_url('Print-invoice-Vendor/').$row->invoice_id.'" target="_blank" class="btn btn-pill btn-primary edit_data"  title="Printer"><i class="fas fa-file-alt"></i></a> 
                              ';  
             
              $data[] = $sub_array;  
@@ -180,6 +182,74 @@ class vendor_invoice extends CI_Controller{
         }
         
     }
+
+    public function move_ticket($id){
+        if($this->Users_model->check_token())
+        {
+            $data['vender_data'] = $this->Vendor_invoice_model->select_invoice($id);
+            $data['rate'] = $this->Rate_model->select_item();
+            $data['fetch_data'] = $this->Vendor_invoice_model->select_item_by_invoice($id);
+            $this->load->view('conten/accounting/Follow_up_vender/view_move_invoice_vendor',$data,false);
+        }
+        
+    }
+
+    public function move_invoice(){
+        if($this->Users_model->check_token())
+        {
+            $ticket_data = $this->Vendor_invoice_model->select_invoice($_POST["invoice_id"]);
+
+            date_default_timezone_set("Asia/Bangkok");
+            $vendor_id = $ticket_data->vendor_id;
+            $rate_name = $ticket_data->rate_name;
+            $ticket_total = $_POST["total_price_check"];
+    
+            $item_move = $_POST["move_id"];
+         
+    
+            $data_invoice = array(
+                        'Date' => date("Y-m-d H:i:s"),
+                        'vendor_id' => $vendor_id, 
+                        'rate_name' => $rate_name, 
+                        'status' => 'Normal',
+                        'amount' => $ticket_total,
+                        'ticket_total' => $ticket_total,
+                        'username' => $this->Users_model->get_username_token(),
+                        );
+            $invoice_id = $this->Vendor_invoice_model->add_invoice($data_invoice);
+
+            for($count = 0; $count < count($item_move); $count++)
+            {
+                $move_id = $item_move[$count];
+               
+                $this->Vendor_invoice_model->move_item($move_id,$invoice_id);
+            }
+
+            $this->Vendor_invoice_model->move_invoice_amount($_POST["invoice_id"],$ticket_total);
+           
+          
+
+            if($invoice_id){
+                $myObj = array(
+                    'status' => 'ok',
+                    'msg' =>  'ບັນທືກສຳເລັດ',
+                    'ticket' =>  $invoice_id,
+                    );
+    
+            }else{
+                $myObj = array(
+                    'status' => 'ON',
+                    'msg' =>  'ບໍ່ສາມາດບັນທືກໄດ້',
+                    );
+            }
+            
+    
+            echo json_encode($myObj);
+        }
+        
+    }
+
+
 
     public function insert_invoice(){
 
