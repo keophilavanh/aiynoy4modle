@@ -160,6 +160,24 @@ class Vendor_invoice_model extends MY_Model{
           return 0 ;
      }
 
+     
+     function mark_invoice($id)
+     {
+
+          
+
+          $info = array(
+                    
+                    'status' => 'Payment', 
+                    
+                    );
+
+          $this->db->where('id', $id);
+          $this->db->update('tb_invoice_vendor_detell', $info);
+
+          return 0 ;
+     }
+
      function pay_invoice_vendor($id,$money)
      {
           $this->db->select('amount');

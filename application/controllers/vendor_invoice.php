@@ -49,10 +49,20 @@ class vendor_invoice extends CI_Controller{
              $sub_array[] = $row->amount;
              $sub_array[] = $row->ticket_total;  
              $sub_array[] = $row->username;  
-             $sub_array[] = '
-                                <a href="'.base_url('Move-invoice-Vendor/').$row->invoice_id.'"  class="btn btn-pill btn-primary move"  title="move">ແຍກບິນ</a>
+             if($row->status == 'Payment'){
+
+                $sub_array[] = '
+                               
                                 <a href="'.base_url('Print-invoice-Vendor/').$row->invoice_id.'" target="_blank" class="btn btn-pill btn-primary edit_data"  title="Printer"><i class="fas fa-file-alt"></i></a> 
-                             ';  
+                             '; 
+
+             }else{
+                $sub_array[] = '
+                                <a href="'.base_url('Check-invoice-Vendor/').$row->invoice_id.'"  class="btn btn-pill btn-primary move"  title="move">ເຊັກລາຍກັນ</a>
+                                <a href="'.base_url('Print-invoice-Vendor/').$row->invoice_id.'" target="_blank" class="btn btn-pill btn-primary edit_data"  title="Printer"><i class="fas fa-file-alt"></i></a> 
+                             '; 
+             }
+              
             
              $data[] = $sub_array;  
             } 
@@ -190,6 +200,41 @@ class vendor_invoice extends CI_Controller{
             $data['rate'] = $this->Rate_model->select_item();
             $data['fetch_data'] = $this->Vendor_invoice_model->select_item_by_invoice($id);
             $this->load->view('conten/accounting/Follow_up_vender/view_move_invoice_vendor',$data,false);
+        }
+        
+    }
+
+    public function check_item_ticket($id){
+        if($this->Users_model->check_token())
+        {
+            $data['vender_data'] = $this->Vendor_invoice_model->select_invoice($id);
+            $data['rate'] = $this->Rate_model->select_item();
+            $data['fetch_data'] = $this->Vendor_invoice_model->select_item_by_invoice($id);
+            $this->load->view('conten/accounting/Follow_up_vender/view_Edit_status_item',$data,false);
+        }
+        
+    }
+
+    public function mark_invoice(){
+        if($this->Users_model->check_token())
+        {
+            
+            $item_move = $_POST["move_id"];
+            for($count = 0; $count < count($item_move); $count++)
+            {
+                $move_id = $item_move[$count];
+               
+                $this->Vendor_invoice_model->mark_invoice($move_id);
+            }
+
+            $myObj = array(
+                    'status' => 'ok',
+                    'msg' =>  'ບັນທືກສຳເລັດ',
+                    );
+        
+            
+    
+            echo json_encode($myObj);
         }
         
     }
